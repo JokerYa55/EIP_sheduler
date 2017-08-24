@@ -5,31 +5,74 @@
  */
 package rtk.eip_sheduler.eipUtil;
 
+import java.net.URL;
+import rtk.eip_sheduler.beans.TUsers;
+import rtk.eip_sheduler.XMLUtil.utlXML;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import static rtk.eip_sheduler.XMLUtil.utlXML.XMLtoString;
+import rtk.eip_sheduler.httpUtil.utlHttp;
+
 /**
  *
  * @author vasil
  */
 public class utlEip {
+
+    private URL url;
+
+    public utlEip(URL url) {
+        this.url = url;
+    }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    public static String addUser(){
+    public String addUser(TUsers user) {
         String res = null;
         try {
+            // Добавляем XML
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.newDocument();
+            Element rootElement = doc.createElement("request");
+            /*
+            user="petrov" surname="Петров" name="Петр" patronymic="Иванович" dob="1985-08-08T00:00:00+06:00" region="23" contactEmail="petrov@gmail.com" contactPhone="9652323232"
+            */
+            rootElement.setAttribute("reqType", "CREATE_USER");
+            rootElement.setAttribute("user", "petrov");
+            rootElement.setAttribute("surname", "Петров");
+            rootElement.setAttribute("name", "Петр");
+            rootElement.setAttribute("patronymic", "Иванович");
+            rootElement.setAttribute("dob", "1985-08-08T00:00:00+06:00");
+            rootElement.setAttribute("region", "23");
+            rootElement.setAttribute("contactEmail", "petrov@gmail.com");
+            rootElement.setAttribute("contactPhone", "9652323232");           
+            doc.appendChild(rootElement);
+            
+            String dataXml = XMLtoString(doc);
+            
+            utlHttp http = new utlHttp();
+            http.doPost(url.toString(), null, null);
             
         } catch (Exception e) {
         }
         return res;
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    public static String updateUser(){
+    public String updateUser(TUsers user) {
         String res = null;
         try {
-            
+
         } catch (Exception e) {
         }
         return res;
