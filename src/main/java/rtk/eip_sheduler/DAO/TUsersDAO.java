@@ -8,13 +8,14 @@ package rtk.eip_sheduler.DAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
+import rtk.eip_sheduler.beans.TUsers;
 import rtk.eip_sheduler.interfaces.daoInterface;
 
 /**
  *
  * @author vasil
  */
-public class TUsersDAO implements daoInterface<TUsersDAO, Long> {
+public class TUsersDAO implements daoInterface<TUsers, Long> {
 
     private EntityManager em;
     private Logger log = Logger.getLogger(getClass().getName());
@@ -29,18 +30,20 @@ public class TUsersDAO implements daoInterface<TUsersDAO, Long> {
     }
 
     @Override
-    public TUsersDAO getItem(Long id) {
+    public TUsers getItem(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<TUsersDAO> getList() {
+    public List<TUsers> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<TUsersDAO> getList(Long startIdx, Long stopIdx) {
+    public List<TUsers> getList(Long startIdx, Long stopIdx) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
 
 }

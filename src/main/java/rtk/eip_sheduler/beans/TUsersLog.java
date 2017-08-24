@@ -37,7 +37,7 @@ public class TUsersLog implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "flag")
     private boolean flag;
@@ -45,7 +45,7 @@ public class TUsersLog implements Serializable {
     private String operType;
     @Basic(optional = false)
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
@@ -59,11 +59,11 @@ public class TUsersLog implements Serializable {
     public TUsersLog() {
     }
 
-    public TUsersLog(Integer id) {
+    public TUsersLog(Long id) {
         this.id = id;
     }
 
-    public TUsersLog(Integer id, boolean flag, String userId, String username, Date dateOper) {
+    public TUsersLog(Long id, boolean flag, Long userId, String username, Date dateOper) {
         this.id = id;
         this.flag = flag;
         this.userId = userId;
@@ -71,11 +71,11 @@ public class TUsersLog implements Serializable {
         this.dateOper = dateOper;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -95,11 +95,11 @@ public class TUsersLog implements Serializable {
         this.operType = operType;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
