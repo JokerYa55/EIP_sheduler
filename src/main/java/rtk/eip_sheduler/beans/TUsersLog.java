@@ -53,6 +53,8 @@ public class TUsersLog implements Serializable {
     @Column(name = "date_oper")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOper;
+    @Column(name = "send_count", nullable = false, columnDefinition = "integer DEFAULT 0")
+    private Integer send_count;
 
     public TUsersLog() {
     }
@@ -140,6 +142,14 @@ public class TUsersLog implements Serializable {
     @Override
     public String toString() {
         return "rtk.eip_sheduler.DAO.TUsersLog[ id=" + id + " ]";
+    }
+
+    public Integer getSend_count() {
+        return send_count;
+    }
+
+    public void setSend_count(Integer send_count) {
+        this.send_count = send_count;
     }
     
 }
