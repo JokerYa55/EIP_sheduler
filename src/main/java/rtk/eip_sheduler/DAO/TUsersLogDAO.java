@@ -7,32 +7,56 @@ package rtk.eip_sheduler.DAO;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import org.apache.log4j.Logger;
+import rtk.eip_sheduler.beans.TUsersLog;
 import rtk.eip_sheduler.interfaces.daoInterface;
 
 /**
  *
  * @author vasil
  */
-public class TUsersLogDAO implements daoInterface<TUsersLogDAO, Long>{
+public class TUsersLogDAO implements daoInterface<TUsersLog, Long> {
+
+    private EntityManager em;
+    private Logger log = Logger.getLogger(getClass().getName());
+
+    public TUsersLogDAO(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public EntityManager getEM() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.em;
     }
 
     @Override
-    public TUsersLogDAO getItem(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TUsersLog getItem(Long id) {
+        TUsersLog res = null;
+        try {
+             TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findById", TUsersLog.class);
+             res = namedQuery.getSingleResult();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return res;
     }
 
     @Override
-    public List<TUsersLogDAO> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<TUsersLog> getList() {
+        List<TUsersLog> res = null;
+        try {
+             TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findAll", TUsersLog.class);
+             res = namedQuery.getResultList();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return res;
     }
 
     @Override
-    public List<TUsersLogDAO> getList(Long startIdx, Long stopIdx) {
+    public List<TUsersLog> getList(Long startIdx, Long stopIdx) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
