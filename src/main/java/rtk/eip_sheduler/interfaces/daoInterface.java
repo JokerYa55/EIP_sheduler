@@ -50,7 +50,9 @@ public interface daoInterface<T, V> {
         T res = null;
         try {
             EntityManager em = getEM();
-            res = em.merge(Item);
+            em.getTransaction().begin();
+            em.merge(Item);
+            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +68,9 @@ public interface daoInterface<T, V> {
         boolean res = true;
         try {
             EntityManager em = getEM();
+            em.getTransaction().begin();
             em.detach(Item);
+            em.getTransaction().commit();
         } catch (Exception e) {
             res = false;
             e.printStackTrace();
@@ -82,7 +86,10 @@ public interface daoInterface<T, V> {
     default public boolean updateItem(T Item) {
         boolean res = true;
         try {
-
+            EntityManager em = getEM();
+            em.getTransaction().begin();
+            em.merge(Item);
+            em.getTransaction().commit();
         } catch (Exception e) {
             res = false;
             e.printStackTrace();

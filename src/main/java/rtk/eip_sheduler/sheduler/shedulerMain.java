@@ -27,9 +27,12 @@ public class shedulerMain {
         Logger log = Logger.getLogger(shedulerMain.class.getName());
         log.info("Start");
         EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
+        //em.setProperty(propertyName, log);
         List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
         for (TUsersLog item : logItems) {
             log.info(item);
+            item.setFlag(true);
+            (new TUsersLogDAO(em)).updateItem(item);
         }
     }
 
