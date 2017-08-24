@@ -5,8 +5,6 @@
  */
 package rtk.eip_sheduler.sheduler;
 
-import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
-import java.io.StringWriter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -15,19 +13,14 @@ import rtk.eip_sheduler.DAO.TUsersDAO;
 import rtk.eip_sheduler.DAO.TUsersLogDAO;
 import rtk.eip_sheduler.beans.TUsers;
 import rtk.eip_sheduler.beans.TUsersLog;
+import rtk.eip_sheduler.XMLUtil.utlXML;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import static rtk.eip_sheduler.XMLUtil.utlXML.XMLtoString;
 
 /**
  *
@@ -79,29 +72,12 @@ public class shedulerMain {
             doc.appendChild(rootElement);
            
 
-            log.debug(toString(doc));
+            log.debug(XMLtoString(doc));
 
         } catch (ParserConfigurationException | DOMException e) {
             log.error(e.getMessage());
         }
 
-    }
-
-    public static String toString(Document doc) {
-        try {
-            StringWriter sw = new StringWriter();
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer transformer = tf.newTransformer();
-            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-
-            transformer.transform(new DOMSource(doc), new StreamResult(sw));
-            return sw.toString();
-        } catch (Exception ex) {
-            throw new RuntimeException("Error converting to String", ex);
-        }
-    }
+    }    
 
 }
