@@ -481,7 +481,7 @@ public class TUsers implements Serializable {
 
     @Override
     public String toString() {
-        return "rtk.eip_sheduler.DAO.TUsers[ id=" + id + " ]";
+        return "TUsers{" + "id=" + id + ", address=" + address + ", email=" + email + ", hashType=" + hashType + ", idApp1=" + idApp1 + ", idApp10=" + idApp10 + ", idApp11=" + idApp11 + ", idApp12=" + idApp12 + ", idApp13=" + idApp13 + ", idApp14=" + idApp14 + ", idApp15=" + idApp15 + ", idApp16=" + idApp16 + ", idApp17=" + idApp17 + ", idApp18=" + idApp18 + ", idApp19=" + idApp19 + ", idApp2=" + idApp2 + ", idApp20=" + idApp20 + ", idApp21=" + idApp21 + ", idApp22=" + idApp22 + ", idApp23=" + idApp23 + ", idApp24=" + idApp24 + ", idApp25=" + idApp25 + ", idApp27=" + idApp27 + ", idApp28=" + idApp28 + ", idApp29=" + idApp29 + ", idApp3=" + idApp3 + ", idApp30=" + idApp30 + ", idApp4=" + idApp4 + ", idApp5=" + idApp5 + ", idApp6=" + idApp6 + ", idApp7=" + idApp7 + ", idApp8=" + idApp8 + ", idApp9=" + idApp9 + ", password=" + password + ", passwordNotHash=" + passwordNotHash + ", phone=" + phone + ", username=" + username + ", salt=" + salt + '}';
     }
-    
+
 }

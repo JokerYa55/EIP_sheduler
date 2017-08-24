@@ -7,6 +7,7 @@ package rtk.eip_sheduler.DAO;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 import rtk.eip_sheduler.beans.TUsers;
 import rtk.eip_sheduler.interfaces.daoInterface;
@@ -23,7 +24,7 @@ public class TUsersDAO implements daoInterface<TUsers, Long> {
     public TUsersDAO(EntityManager em) {
         this.em = em;
     }
-    
+
     @Override
     public EntityManager getEM() {
         return this.em;
@@ -31,19 +32,32 @@ public class TUsersDAO implements daoInterface<TUsers, Long> {
 
     @Override
     public TUsers getItem(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TUsers res = null;
+        try {
+            TypedQuery<TUsers> namedQuery = em.createNamedQuery("TUsers.findById", TUsers.class);
+            namedQuery.setParameter("id", id);
+            res = namedQuery.getSingleResult();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return res;
     }
 
     @Override
     public List<TUsers> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<TUsers> res = null;
+        try {
+            TypedQuery<TUsers> namedQuery = em.createNamedQuery("TUsers.findAll", TUsers.class);
+            res = namedQuery.getResultList();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return res;
     }
 
     @Override
     public List<TUsers> getList(Long startIdx, Long stopIdx) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-   
 
 }

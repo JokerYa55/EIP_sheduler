@@ -36,6 +36,7 @@ public class shedulerMain {
             // отправка сообщения в ЕИП
             // Получаем данные о пользователе
             TUsers user = (new TUsersDAO(em)).getItem(item.getUserId());
+            log.debug(user);
             // Если получен положительный ответ то ставим отметку об успешной отправке
             item.setFlag(true);
             (new TUsersLogDAO(em)).updateItem(item);

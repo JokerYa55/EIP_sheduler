@@ -35,6 +35,7 @@ public class TUsersLogDAO implements daoInterface<TUsersLog, Long> {
         TUsersLog res = null;
         try {
              TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findById", TUsersLog.class);
+             namedQuery.setParameter("id", id);
              res = namedQuery.getSingleResult();
         } catch (Exception e) {
             log.error(e.getMessage());
