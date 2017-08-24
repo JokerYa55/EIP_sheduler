@@ -13,14 +13,7 @@ import rtk.eip_sheduler.DAO.TUsersDAO;
 import rtk.eip_sheduler.DAO.TUsersLogDAO;
 import rtk.eip_sheduler.beans.TUsers;
 import rtk.eip_sheduler.beans.TUsersLog;
-import rtk.eip_sheduler.XMLUtil.utlXML;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import static rtk.eip_sheduler.XMLUtil.utlXML.XMLtoString;
+
 
 /**
  *
@@ -51,33 +44,10 @@ public class shedulerMain {
                 (new TUsersLogDAO(em)).updateItem(item);
             }
 
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.newDocument();
-            Element rootElement = doc.createElement("request");
-            /*
-            user="petrov" surname="Петров" name="Петр" patronymic="Иванович" dob="1985-08-08T00:00:00+06:00" region="23" contactEmail="petrov@gmail.com" contactPhone="9652323232"
-            */
-            rootElement.setAttribute("reqType", "CREATE_USER");
-            rootElement.setAttribute("user", "petrov");
-            rootElement.setAttribute("surname", "Петров");
-            rootElement.setAttribute("name", "Петр");
-            rootElement.setAttribute("patronymic", "Иванович");
-            rootElement.setAttribute("dob", "1985-08-08T00:00:00+06:00");
-            rootElement.setAttribute("region", "23");
-            rootElement.setAttribute("contactEmail", "petrov@gmail.com");
-            rootElement.setAttribute("contactPhone", "9652323232");
-            
-
-            doc.appendChild(rootElement);
-           
-
-            log.debug(XMLtoString(doc));
-
-        } catch (ParserConfigurationException | DOMException e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
 
-    }    
+    }
 
 }
