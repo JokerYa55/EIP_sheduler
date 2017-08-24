@@ -141,7 +141,7 @@ public class TUsersLog implements Serializable {
 
     @Override
     public String toString() {
-        return "rtk.eip_sheduler.DAO.TUsersLog[ id=" + id + " ]";
+        return "TUsersLog{" + "id=" + id + ", flag=" + flag + ", operType=" + operType + ", userId=" + userId + ", username=" + username + ", dateOper=" + dateOper + ", send_count=" + send_count + '}';
     }
 
     public Integer getSend_count() {
@@ -151,5 +151,5 @@ public class TUsersLog implements Serializable {
     public void setSend_count(Integer send_count) {
         this.send_count = send_count;
     }
-    
+
 }
