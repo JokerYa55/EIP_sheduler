@@ -8,6 +8,7 @@ package rtk.eip_sheduler.XMLUtil;
 import java.io.StringWriter;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -32,11 +33,10 @@ public class utlXML {
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-
             transformer.transform(new DOMSource(doc), new StreamResult(sw));
             return sw.toString();
-        } catch (Exception ex) {
-            throw new RuntimeException("Error converting to String", ex);
+        } catch (IllegalArgumentException | TransformerException ex) {
+            return null;
         }
     }
 }
