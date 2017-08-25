@@ -11,6 +11,7 @@ import rtk.eip_sheduler.beans.TUsers;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import static rtk.eip_sheduler.XMLUtil.utlXML.XMLtoString;
@@ -53,9 +54,10 @@ public class utlEip {
             rootElement.setAttribute("contactEmail", user.getEmail());
             rootElement.setAttribute("contactPhone", user.getPhone());     
             // dob="1985-08-08T00:00:00+06:00" 
-            SimpleDateFormat dateFormatYear = new SimpleDateFormat("YYYY-MM-dd");
-            SimpleDateFormat dateFormatTime = new SimpleDateFormat("hh-mm-ssZ");
-            rootElement.setAttribute("dob", dateFormatYear.format(user.getCreate_date()+ "T") + dateFormatTime.format(user.getCreate_date()));
+            SimpleDateFormat dateFormatYear = new SimpleDateFormat("YYYY-MM-dd'T'");
+            SimpleDateFormat dateFormatTime = new SimpleDateFormat("HH-mm-ssZ");
+            log.debug(user.getCreate_date().toString());
+            rootElement.setAttribute("dob", dateFormatYear.format(user.getCreate_date()) + dateFormatTime.format(user.getCreate_date()));
             
             doc.appendChild(rootElement);
             
@@ -63,9 +65,10 @@ public class utlEip {
             log.debug(dataXml);
             
             utlHttp http = new utlHttp();
-            log.debug(http.doPost(url.toString(), dataXml, null));
+            //log.debug(http.doPost(url.toString(), dataXml, null));
             
         } catch (Exception e) {
+            log.log(Priority.ERROR, e.getMessage());
         }
         return res;
     }

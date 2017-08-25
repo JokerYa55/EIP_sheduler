@@ -47,7 +47,7 @@ public class shedulerMain {
                 (new TUsersLogDAO(em)).updateItem(item);
             }
 
-        } catch (Exception e) {
+        } catch (Exception e) {            
             log.error(e.getMessage());
         }
 
