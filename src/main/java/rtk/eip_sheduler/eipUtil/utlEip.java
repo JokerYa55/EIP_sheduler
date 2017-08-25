@@ -6,6 +6,7 @@
 package rtk.eip_sheduler.eipUtil;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import rtk.eip_sheduler.beans.TUsers;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -47,11 +48,15 @@ public class utlEip {
             rootElement.setAttribute("user", user.getUsername());
             rootElement.setAttribute("surname", user.getFirst_name());
             rootElement.setAttribute("name", user.getSecond_name());
-            rootElement.setAttribute("patronymic", user.getThird_name());
-            rootElement.setAttribute("dob", user.getCreate_date().toString());
+            rootElement.setAttribute("patronymic", user.getThird_name());            
             rootElement.setAttribute("region", "23");
             rootElement.setAttribute("contactEmail", user.getEmail());
-            rootElement.setAttribute("contactPhone", user.getPhone());           
+            rootElement.setAttribute("contactPhone", user.getPhone());     
+            // dob="1985-08-08T00:00:00+06:00" 
+            SimpleDateFormat dateFormatYear = new SimpleDateFormat("YYYY-MM-dd");
+            SimpleDateFormat dateFormatTime = new SimpleDateFormat("hh-mm-ssZ");
+            rootElement.setAttribute("dob", dateFormatYear.format(user.getCreate_date()+ "T") + dateFormatTime.format(user.getCreate_date()));
+            
             doc.appendChild(rootElement);
             
             String dataXml = XMLtoString(doc);            
