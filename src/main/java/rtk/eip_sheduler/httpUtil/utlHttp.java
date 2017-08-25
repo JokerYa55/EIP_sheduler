@@ -15,6 +15,7 @@ import java.util.Map;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -34,12 +35,19 @@ public class utlHttp {
         System.out.println("doPost => " + params.toString());
         String res = null;
         try {
-            HttpClient httpClient = HttpClientBuilder.create().build();
+            int timeout = 30;
+            RequestConfig config = RequestConfig.custom()
+                    .setConnectTimeout(timeout * 1000)
+                    .setConnectionRequestTimeout(timeout * 1000)
+                    .setSocketTimeout(timeout * 1000).build();
+
+            HttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
+
             Gson gson = new Gson();
 
-            HttpPost post = new HttpPost(url);    
+            HttpPost post = new HttpPost(url);
             // Добавляем данные в формате JSON
-            StringEntity postingString = new StringEntity((String) params, "application/xml", "UTF-8");          
+            StringEntity postingString = new StringEntity((String) params, "application/xml", "UTF-8");
             post.setEntity(postingString);
 
             if (headerList != null) {

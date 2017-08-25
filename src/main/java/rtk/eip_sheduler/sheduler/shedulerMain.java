@@ -33,7 +33,7 @@ public class shedulerMain {
             log.info("Start");
             EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
             //em.setProperty(propertyName, log);
-            utlEip Eip = new utlEip(new URL("http://127.0.0.1"));
+            utlEip Eip = new utlEip(new URL("http://192.168.1.240"));
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();            
             for (TUsersLog item : logItems) {
                 log.info(item);
