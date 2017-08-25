@@ -58,7 +58,7 @@ public class utlEip {
             log.debug(dataXml);
             
             utlHttp http = new utlHttp();
-            http.doPost(url.toString(), null, null);
+            http.doPost(url.toString(), dataXml, null);
             
         } catch (Exception e) {
         }

@@ -39,7 +39,7 @@ public class utlHttp {
 
             HttpPost post = new HttpPost(url);    
             // Добавляем данные в формате JSON
-            StringEntity postingString = new StringEntity(gson.toJson(params), "application/json", "UTF-8");          
+            StringEntity postingString = new StringEntity((String) params, "application/xml", "UTF-8");          
             post.setEntity(postingString);
 
             if (headerList != null) {
