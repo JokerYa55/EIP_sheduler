@@ -5,6 +5,7 @@
  */
 package rtk.eip_sheduler.sheduler;
 
+import java.net.URL;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -13,6 +14,7 @@ import rtk.eip_sheduler.DAO.TUsersDAO;
 import rtk.eip_sheduler.DAO.TUsersLogDAO;
 import rtk.eip_sheduler.beans.TUsers;
 import rtk.eip_sheduler.beans.TUsersLog;
+import rtk.eip_sheduler.eipUtil.utlEip;
 
 /**
  *
@@ -31,13 +33,15 @@ public class shedulerMain {
             log.info("Start");
             EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
             //em.setProperty(propertyName, log);
-            List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
+            utlEip Eip = new utlEip(new URL("http://127.0.0.1"));
+            List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();            
             for (TUsersLog item : logItems) {
                 log.info(item);
                 // отправка сообщения в ЕИП
                 // Получаем данные о пользователе
                 TUsers user = (new TUsersDAO(em)).getItem(item.getUserId());
                 log.debug(user);
+                Eip.addUser(user);
                 // Если получен положительный ответ то ставим отметку об успешной отправке
                 item.setFlag(true);
                 (new TUsersLogDAO(em)).updateItem(item);

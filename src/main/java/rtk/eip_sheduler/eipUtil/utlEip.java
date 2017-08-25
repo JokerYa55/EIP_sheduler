@@ -7,11 +7,9 @@ package rtk.eip_sheduler.eipUtil;
 
 import java.net.URL;
 import rtk.eip_sheduler.beans.TUsers;
-import rtk.eip_sheduler.XMLUtil.utlXML;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.DOMException;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import static rtk.eip_sheduler.XMLUtil.utlXML.XMLtoString;
@@ -24,6 +22,7 @@ import rtk.eip_sheduler.httpUtil.utlHttp;
 public class utlEip {
 
     private URL url;
+    private Logger log = Logger.getLogger(getClass().getName());
 
     public utlEip(URL url) {
         this.url = url;
@@ -49,13 +48,14 @@ public class utlEip {
             rootElement.setAttribute("surname", user.getFirst_name());
             rootElement.setAttribute("name", user.getSecond_name());
             rootElement.setAttribute("patronymic", user.getThird_name());
-            rootElement.setAttribute("dob", "1985-08-08T00:00:00+06:00");
+            rootElement.setAttribute("dob", user.getCreate_date().toString());
             rootElement.setAttribute("region", "23");
-            rootElement.setAttribute("contactEmail", "petrov@gmail.com");
-            rootElement.setAttribute("contactPhone", "9652323232");           
+            rootElement.setAttribute("contactEmail", user.getEmail());
+            rootElement.setAttribute("contactPhone", user.getPhone());           
             doc.appendChild(rootElement);
             
-            String dataXml = XMLtoString(doc);
+            String dataXml = XMLtoString(doc);            
+            log.debug(dataXml);
             
             utlHttp http = new utlHttp();
             http.doPost(url.toString(), null, null);
