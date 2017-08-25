@@ -14,7 +14,6 @@ import rtk.eip_sheduler.DAO.TUsersLogDAO;
 import rtk.eip_sheduler.beans.TUsers;
 import rtk.eip_sheduler.beans.TUsersLog;
 
-
 /**
  *
  * @author vasil

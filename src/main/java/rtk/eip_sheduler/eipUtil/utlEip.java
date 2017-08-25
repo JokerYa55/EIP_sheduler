@@ -45,7 +45,7 @@ public class utlEip {
             user="petrov" surname="Петров" name="Петр" patronymic="Иванович" dob="1985-08-08T00:00:00+06:00" region="23" contactEmail="petrov@gmail.com" contactPhone="9652323232"
             */
             rootElement.setAttribute("reqType", "CREATE_USER");
-            rootElement.setAttribute("user", "petrov");
+            rootElement.setAttribute("user", user.getUsername());
             rootElement.setAttribute("surname", "Петров");
             rootElement.setAttribute("name", "Петр");
             rootElement.setAttribute("patronymic", "Иванович");
