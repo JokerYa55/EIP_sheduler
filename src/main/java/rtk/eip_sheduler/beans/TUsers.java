@@ -143,9 +143,10 @@ public class TUsers implements Serializable {
     @Column(name = "date_birthday", unique = false, nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date_birthday;
-
     @Column(name = "user_gender", unique = false, nullable = true)
     private Integer user_gender;
+    @Column(name = "user_region", unique = false, nullable = true)
+    private Integer user_region;
 
     public TUsers() {
     }
@@ -508,6 +509,30 @@ public class TUsers implements Serializable {
     @Override
     public String toString() {
         return "TUsers{" + "id=" + id + ", username=" + username + ", first_name=" + first_name + ", second_name=" + second_name + ", third_name=" + third_name + ", email=" + email + ", password=" + password + ", password_not_hash=" + password_not_hash + ", phone=" + phone + ", address=" + address + ", hesh_type=" + hesh_type + ", salt=" + salt + ", id_app_1=" + id_app_1 + ", id_app_2=" + id_app_2 + ", id_app_3=" + id_app_3 + ", id_app_4=" + id_app_4 + ", id_app_5=" + id_app_5 + ", id_app_6=" + id_app_6 + ", id_app_7=" + id_app_7 + ", id_app_8=" + id_app_8 + ", id_app_9=" + id_app_9 + ", id_app_10=" + id_app_10 + ", id_app_11=" + id_app_11 + ", id_app_12=" + id_app_12 + ", id_app_13=" + id_app_13 + ", id_app_14=" + id_app_14 + ", id_app_15=" + id_app_15 + ", id_app_16=" + id_app_16 + ", id_app_17=" + id_app_17 + ", id_app_18=" + id_app_18 + ", id_app_19=" + id_app_19 + ", id_app_20=" + id_app_20 + ", id_app_21=" + id_app_21 + ", id_app_22=" + id_app_22 + ", id_app_23=" + id_app_23 + ", id_app_24=" + id_app_24 + ", id_app_25=" + id_app_25 + ", id_app_27=" + id_app_27 + ", id_app_28=" + id_app_28 + ", id_app_29=" + id_app_29 + ", id_app_30=" + id_app_30 + ", user_status=" + user_status + ", create_date=" + create_date + '}';
+    }
+
+    public Date getDate_birthday() {
+        return date_birthday;
+    }
+
+    public void setDate_birthday(Date date_birthday) {
+        this.date_birthday = date_birthday;
+    }
+
+    public Integer getUser_gender() {
+        return user_gender;
+    }
+
+    public void setUser_gender(Integer user_gender) {
+        this.user_gender = user_gender;
+    }
+
+    public Integer getUser_region() {
+        return user_region;
+    }
+
+    public void setUser_region(Integer user_region) {
+        this.user_region = user_region;
     }
 
 }
