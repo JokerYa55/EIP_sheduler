@@ -7,9 +7,7 @@ package rtk.eip_sheduler.httpUtil;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import org.apache.http.Header;
@@ -20,6 +18,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -46,7 +45,9 @@ public class utlHttp {
             Gson gson = new Gson();
 
             HttpPost post = new HttpPost(url);
-            // Добавляем данные в формате JSON
+            // Добавляем данные в формате xml
+            
+            //StringEntity postingString = new StringEntity("contactEmail=andr_vasil@mail.ru", "text/plain", "UTF-8");
             StringEntity postingString = new StringEntity((String) params, "application/xml", "UTF-8");
             post.setEntity(postingString);
 
