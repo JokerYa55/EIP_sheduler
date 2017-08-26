@@ -50,14 +50,14 @@ public class utlEip {
             rootElement.setAttribute("surname", user.getFirst_name());
             rootElement.setAttribute("name", user.getSecond_name());
             rootElement.setAttribute("patronymic", user.getThird_name());            
-            rootElement.setAttribute("region", "23");
+            rootElement.setAttribute("region", user.getUser_region().toString());
             rootElement.setAttribute("contactEmail", user.getEmail());
             rootElement.setAttribute("contactPhone", user.getPhone());     
             // dob="1985-08-08T00:00:00+06:00" 
             SimpleDateFormat dateFormatYear = new SimpleDateFormat("YYYY-MM-dd'T'");
             SimpleDateFormat dateFormatTime = new SimpleDateFormat("HH-mm-ssZ");
             log.debug(user.getCreate_date().toString());
-            rootElement.setAttribute("dob", dateFormatYear.format(user.getCreate_date()) + dateFormatTime.format(user.getCreate_date()));
+            rootElement.setAttribute("dob", dateFormatYear.format(user.getDate_birthday()) + dateFormatTime.format(user.getDate_birthday()));
             
             doc.appendChild(rootElement);
             
