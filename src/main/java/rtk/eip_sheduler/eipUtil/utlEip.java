@@ -103,14 +103,70 @@ public class utlEip {
 
     /**
      *
+     * @param user
      * @return
      */
     public String updateUser(TUsers user) {
         log.info("updateUser");
         String res = null;
-        try {
 
+        try {
+            // Добавляем XML
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.newDocument();
+            Element rootElement = doc.createElement("request");
+            /*
+            user="petrov" surname="Петров" name="Петр" patronymic="Иванович" dob="1985-08-08T00:00:00+06:00" region="23" contactEmail="petrov@gmail.com" contactPhone="9652323232"
+             */
+            rootElement.setAttribute("reqType", "EDIT_USER");
+            rootElement.setAttribute("user", user.getUsername());
+            if (user.getFirst_name() != null) {
+                rootElement.setAttribute("surname", user.getFirst_name());
+            } else {
+                rootElement.setAttribute("surname", "");
+            }
+
+            if (user.getSecond_name() != null) {
+                rootElement.setAttribute("name", user.getSecond_name());
+            } else {
+                rootElement.setAttribute("name", "");
+            }
+            if (user.getThird_name() != null) {
+                rootElement.setAttribute("patronymic", user.getThird_name());
+            } else {
+                rootElement.setAttribute("patronymic", "");
+            }
+            if (user.getUser_region() != null) {
+                rootElement.setAttribute("region", user.getUser_region().toString());
+            } else {
+                rootElement.setAttribute("region", "");
+            }
+            if (user.getEmail() != null) {
+                rootElement.setAttribute("contactEmail", user.getEmail());
+            } else {
+                rootElement.setAttribute("contactEmail", "");
+            }
+            if (user.getPhone() != null) {
+                rootElement.setAttribute("contactPhone", user.getPhone());
+            } else {
+                rootElement.setAttribute("contactPhone", "");
+            }
+            if (user.getDate_birthday() != null) {
+                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
+            } else {
+                rootElement.setAttribute("dob", "");
+            }
+
+            doc.appendChild(rootElement);
+
+            String dataXml = xmlToString(doc);
+            log.debug(dataXml);
+
+            utlHttp http = new utlHttp();
+            log.debug(http.doPost(url.toString(), dataXml, null));
         } catch (Exception e) {
+            log.error(e.getMessage());
         }
         return res;
     }

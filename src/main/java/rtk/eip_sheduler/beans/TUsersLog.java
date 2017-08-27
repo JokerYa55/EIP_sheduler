@@ -27,13 +27,13 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "t_users_log")
 @NamedQueries({
-    @NamedQuery(name = "TUsersLog.findAll", query = "SELECT t FROM TUsersLog t")
-    , @NamedQuery(name = "TUsersLog.findById", query = "SELECT t FROM TUsersLog t WHERE t.id = :id")
-    , @NamedQuery(name = "TUsersLog.findByFlag", query = "SELECT t FROM TUsersLog t WHERE t.flag = :flag")
-    , @NamedQuery(name = "TUsersLog.findByOperType", query = "SELECT t FROM TUsersLog t WHERE t.operType = :operType")
-    , @NamedQuery(name = "TUsersLog.findByUserId", query = "SELECT t FROM TUsersLog t WHERE t.userId = :userId")
-    , @NamedQuery(name = "TUsersLog.findByUsername", query = "SELECT t FROM TUsersLog t WHERE t.username = :username")
-    , @NamedQuery(name = "TUsersLog.findByDateOper", query = "SELECT t FROM TUsersLog t WHERE t.dateOper = :dateOper")})
+    @NamedQuery(name = "TUsersLog.findAll", query = "SELECT t FROM TUsersLog t where t.flag = false and t.send_count<=:send_count")
+    , @NamedQuery(name = "TUsersLog.findById", query = "SELECT t FROM TUsersLog t WHERE t.id = :id and t.flag = false and t.send_count<=:send_count")
+    , @NamedQuery(name = "TUsersLog.findByFlag", query = "SELECT t FROM TUsersLog t WHERE t.flag = :flag and t.send_count<=:send_count")
+    , @NamedQuery(name = "TUsersLog.findByOperType", query = "SELECT t FROM TUsersLog t WHERE t.operType = :operType and t.flag = false and t.send_count<=:send_count")
+    , @NamedQuery(name = "TUsersLog.findByUserId", query = "SELECT t FROM TUsersLog t WHERE t.userId = :userId and t.flag = false and t.send_count<=:send_count")
+    , @NamedQuery(name = "TUsersLog.findByUsername", query = "SELECT t FROM TUsersLog t WHERE t.username = :username and t.flag = false and t.send_count<=:send_count")
+    , @NamedQuery(name = "TUsersLog.findByDateOper", query = "SELECT t FROM TUsersLog t WHERE t.dateOper = :dateOper and t.flag = false and t.send_count<=:send_count")})
 public class TUsersLog implements Serializable {
 
     private static final long serialVersionUID = 1L;

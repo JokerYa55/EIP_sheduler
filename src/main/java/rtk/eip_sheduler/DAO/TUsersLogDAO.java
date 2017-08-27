@@ -45,9 +45,11 @@ public class TUsersLogDAO implements daoInterface<TUsersLog, Long> {
 
     @Override
     public List<TUsersLog> getList() {
+        log.debug("getList");
         List<TUsersLog> res = null;
         try {
              TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findAll", TUsersLog.class);
+             namedQuery.setParameter("send_count", 10);
              res = namedQuery.getResultList();
         } catch (Exception e) {
             log.error(e.getMessage());
