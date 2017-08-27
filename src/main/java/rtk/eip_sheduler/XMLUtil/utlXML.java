@@ -5,26 +5,35 @@
  */
 package rtk.eip_sheduler.XMLUtil;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *
  * @author vasil
  */
 public class utlXML {
+
     /**
-     * 
+     *
      * @param doc
-     * @return 
+     * @return
      */
-    public static String XMLtoString(Document doc) {
+    public static String xmlToString(Document doc) {
         try {
             StringWriter sw = new StringWriter();
             TransformerFactory tf = TransformerFactory.newInstance();
@@ -36,6 +45,17 @@ public class utlXML {
             transformer.transform(new DOMSource(doc), new StreamResult(sw));
             return sw.toString();
         } catch (IllegalArgumentException | TransformerException ex) {
+            return null;
+        }
+    }
+
+    public static Document stringToXml(String xmlString)  {
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new InputSource(new StringReader(xmlString)));
+            return doc;
+        } catch (Exception ex) {
             return null;
         }
     }
