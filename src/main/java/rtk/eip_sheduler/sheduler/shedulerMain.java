@@ -71,8 +71,8 @@ public class shedulerMain {
                         break;
                     case "U":
                         res = Eip.updateUser(user);
-                        res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                + "<response resultCode =\"0\" resultComment=\"Логин создан автоматически\" user=\"petrov-elk-rtk\" dateTime=\"2013-05-08T12:39:00+06:00\"/>";
+                        /*res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                + "<response resultCode =\"0\" resultComment=\"Логин создан автоматически\" user=\"petrov-elk-rtk\" dateTime=\"2013-05-08T12:39:00+06:00\"/>";*/
                         resXml = stringToXml(res);
                         log.info(resXml);
                         root = resXml.getDocumentElement();
