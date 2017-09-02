@@ -93,7 +93,7 @@ public class utlEip {
             log.debug(dataXml);
 
             utlHttp http = new utlHttp();
-            log.debug(http.doPost(url.toString(), dataXml, null));
+            res = http.doPost(url.toString(), dataXml, null);
 
         } catch (Exception e) {
             log.error(e.getMessage());

@@ -50,7 +50,7 @@ public class utlHttp {
             // Добавляем данные в формате xml
 
             //StringEntity postingString = new StringEntity("contactEmail=andr_vasil@mail.ru", "text/plain", "UTF-8");
-            StringEntity postingString = new StringEntity((String) params, "text/xml", "UTF-8");
+            StringEntity postingString = new StringEntity((String) params, "application/xml", "UTF-8");
             post.setEntity(postingString);
 
             if (headerList != null) {
