@@ -44,13 +44,14 @@ public class utlHttp {
 
             HttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
 
-            Gson gson = new Gson();
+            //Gson gson = new Gson();
 
             HttpPost post = new HttpPost(url);
             // Добавляем данные в формате xml
 
             //StringEntity postingString = new StringEntity("contactEmail=andr_vasil@mail.ru", "text/plain", "UTF-8");
             StringEntity postingString = new StringEntity((String) params, "application/xml", "UTF-8");
+            log.info(postingString.toString());
             post.setEntity(postingString);
 
             if (headerList != null) {
@@ -62,7 +63,7 @@ public class utlHttp {
             }
             HttpResponse response = httpClient.execute(post);
 
-            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
             String line = "";
             StringBuilder json = new StringBuilder();
             while ((line = rd.readLine()) != null) {
@@ -161,7 +162,7 @@ public class utlHttp {
                 json.append(line);
             }
 
-            //System.out.println("json = " + json.toString());
+           log.info("json = " + json.toString());
             res = json.toString();
             /*org.json.simple.parser.JSONParser parser = new JSONParser();
             Object obj = parser.parse(json.toString());
