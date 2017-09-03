@@ -12,7 +12,6 @@ import rtk.eip_sheduler.beans.TUsers;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import static rtk.eip_sheduler.XMLUtil.utlXML.xmlToString;
@@ -81,11 +80,11 @@ public class utlEip {
             } else {
                 rootElement.setAttribute("contactPhone", "");
             }
-            if (user.getDate_birthday() != null) {
-                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
-            } else {
-                rootElement.setAttribute("dob", "");
-            }
+//            if (user.getDate_birthday() != null) {
+//                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
+//            } else {
+//                rootElement.setAttribute("dob", "");
+//            }
 
             doc.appendChild(rootElement);
 
@@ -152,11 +151,11 @@ public class utlEip {
             } else {
                 rootElement.setAttribute("contactPhone", "");
             }
-            if (user.getDate_birthday() != null) {
-                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
-            } else {
-                rootElement.setAttribute("dob", "");
-            }
+//            if (user.getDate_birthday() != null) {
+//                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
+//            } else {
+//                rootElement.setAttribute("dob", "");
+//            }
 
             doc.appendChild(rootElement);
 

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
@@ -23,8 +24,6 @@ import org.apache.log4j.Logger;
  *
  * @author vasil
  */
-@Entity
-@Table(name = "t_users")
 @NamedQueries({
     @NamedQuery(name = "TUsers.findAll", query = "SELECT t FROM TUsers t where t.user_status = 0")
     , @NamedQuery(name = "TUsers.findById", query = "SELECT t FROM TUsers t WHERE t.id = :id and t.user_status = 0")
@@ -36,6 +35,11 @@ import org.apache.log4j.Logger;
     , @NamedQuery(name = "TUsers.findByPhone", query = "SELECT t FROM TUsers t WHERE t.phone = :phone and t.user_status = 0")
     , @NamedQuery(name = "TUsers.findByUsername", query = "SELECT t FROM TUsers t WHERE t.username = :username and t.user_status = 0")
     , @NamedQuery(name = "TUsers.findBySalt", query = "SELECT t FROM TUsers t WHERE t.salt = :salt and t.user_status = 0")})
+@Entity
+@Table(name = "t_users", indexes = {
+    @Index(name = "t_users_status_idx", columnList = "user_status")
+    ,
+    @Index(name = "t_users_username_idx", columnList = "username")})
 public class TUsers implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,8 +75,8 @@ public class TUsers implements Serializable {
     @Column(name = "phone", nullable = true)
     private String phone;
     // Адрес
-    @Column(name = "address", nullable = true)
-    private String address;
+    //@Column(name = "address", nullable = true)
+    //private String address;
     @Column(name = "hash_type", nullable = true)
     private String hesh_type;
     @Column(name = "salt", nullable = true)
@@ -135,31 +139,24 @@ public class TUsers implements Serializable {
     private String id_app_29;
     @Column(name = "id_app_30", unique = true, nullable = true)
     private String id_app_30;
-    @Column(name = "user_status", unique = true, nullable = false, columnDefinition = "integer DEFAULT 0")
+    @Column(name = "user_status", unique = false, nullable = false, columnDefinition = "integer DEFAULT 0")
     private Integer user_status;
     @Column(name = "create_date", unique = false, nullable = false, columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date create_date;
-    @Column(name = "date_birthday", unique = false, nullable = true)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date date_birthday;
-    @Column(name = "user_gender", unique = false, nullable = true)
-    private Integer user_gender;
+//    @Column(name = "date_birthday", unique = false, nullable = true)
+//    @Temporal(javax.persistence.TemporalType.DATE)
+//    private Date date_birthday;
+//    @Column(name = "user_gender", unique = false, nullable = true)
+//    private Integer user_gender;
     @Column(name = "user_region", unique = false, nullable = true)
     private Integer user_region;
+    @Column(name = "enabled", unique = false, nullable = false, columnDefinition = "boolean DEFAULT true")
+    private boolean enabled;
+    @Column(name = "description", unique = false, nullable = true)
+    private String description;
 
     public TUsers() {
-    }
-
-    public TUsers(Long id, String first_name, String third_name, String email, String password, String address, String hesh_type, String salt) {
-        this.id = id;
-        this.first_name = first_name;
-        this.third_name = third_name;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.hesh_type = hesh_type;
-        this.salt = salt;
     }
 
     public Long getId() {
@@ -232,14 +229,6 @@ public class TUsers implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getHesh_type() {
@@ -506,33 +495,33 @@ public class TUsers implements Serializable {
         this.create_date = create_date;
     }
 
-    @Override
-    public String toString() {
-        return "TUsers{" + "id=" + id + ", username=" + username + ", first_name=" + first_name + ", second_name=" + second_name + ", third_name=" + third_name + ", email=" + email + ", password=" + password + ", password_not_hash=" + password_not_hash + ", phone=" + phone + ", address=" + address + ", hesh_type=" + hesh_type + ", salt=" + salt + ", id_app_1=" + id_app_1 + ", id_app_2=" + id_app_2 + ", id_app_3=" + id_app_3 + ", id_app_4=" + id_app_4 + ", id_app_5=" + id_app_5 + ", id_app_6=" + id_app_6 + ", id_app_7=" + id_app_7 + ", id_app_8=" + id_app_8 + ", id_app_9=" + id_app_9 + ", id_app_10=" + id_app_10 + ", id_app_11=" + id_app_11 + ", id_app_12=" + id_app_12 + ", id_app_13=" + id_app_13 + ", id_app_14=" + id_app_14 + ", id_app_15=" + id_app_15 + ", id_app_16=" + id_app_16 + ", id_app_17=" + id_app_17 + ", id_app_18=" + id_app_18 + ", id_app_19=" + id_app_19 + ", id_app_20=" + id_app_20 + ", id_app_21=" + id_app_21 + ", id_app_22=" + id_app_22 + ", id_app_23=" + id_app_23 + ", id_app_24=" + id_app_24 + ", id_app_25=" + id_app_25 + ", id_app_27=" + id_app_27 + ", id_app_28=" + id_app_28 + ", id_app_29=" + id_app_29 + ", id_app_30=" + id_app_30 + ", user_status=" + user_status + ", create_date=" + create_date + '}';
-    }
-
-    public Date getDate_birthday() {
-        return date_birthday;
-    }
-
-    public void setDate_birthday(Date date_birthday) {
-        this.date_birthday = date_birthday;
-    }
-
-    public Integer getUser_gender() {
-        return user_gender;
-    }
-
-    public void setUser_gender(Integer user_gender) {
-        this.user_gender = user_gender;
-    }
-
     public Integer getUser_region() {
         return user_region;
     }
 
     public void setUser_region(Integer user_region) {
         this.user_region = user_region;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "TUsers{" + "id=" + id + ", username=" + username + ", first_name=" + first_name + ", second_name=" + second_name + ", third_name=" + third_name + ", email=" + email + ", password=" + password + ", password_not_hash=" + password_not_hash + ", phone=" + phone + ", hesh_type=" + hesh_type + ", salt=" + salt + ", id_app_1=" + id_app_1 + ", id_app_2=" + id_app_2 + ", id_app_3=" + id_app_3 + ", id_app_4=" + id_app_4 + ", id_app_5=" + id_app_5 + ", id_app_6=" + id_app_6 + ", id_app_7=" + id_app_7 + ", id_app_8=" + id_app_8 + ", id_app_9=" + id_app_9 + ", id_app_10=" + id_app_10 + ", id_app_11=" + id_app_11 + ", id_app_12=" + id_app_12 + ", id_app_13=" + id_app_13 + ", id_app_14=" + id_app_14 + ", id_app_15=" + id_app_15 + ", id_app_16=" + id_app_16 + ", id_app_17=" + id_app_17 + ", id_app_18=" + id_app_18 + ", id_app_19=" + id_app_19 + ", id_app_20=" + id_app_20 + ", id_app_21=" + id_app_21 + ", id_app_22=" + id_app_22 + ", id_app_23=" + id_app_23 + ", id_app_24=" + id_app_24 + ", id_app_25=" + id_app_25 + ", id_app_27=" + id_app_27 + ", id_app_28=" + id_app_28 + ", id_app_29=" + id_app_29 + ", id_app_30=" + id_app_30 + ", user_status=" + user_status + ", create_date=" + create_date + ", user_region=" + user_region + ", enabled=" + enabled + ", description=" + description + '}';
     }
 
 }
