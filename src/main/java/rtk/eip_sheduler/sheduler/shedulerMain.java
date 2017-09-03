@@ -40,66 +40,70 @@ public class shedulerMain {
             utlEip Eip = new utlEip(new URL("http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1"));
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
             for (TUsersLog item : logItems) {
-                log.info(item);
-                // Получаем данные о пользователе
-                TUsers user = (new TUsersDAO(em)).getItem(item.getUserId());
-                log.debug(user);
+                try {
+                    log.info(item);
+                    // Получаем данные о пользователе
+                    TUsers user = (new TUsersDAO(em)).getItem(item.getUserId());
+                    log.debug(user);
 
-                // Определяем тип операции ADD или UPD
-                String res = null;
-                Document resXml = null;
-                Element root;
-                String resultCode;
-                switch (item.getOperType().toUpperCase()) {
-                    case "I":
-                        res = Eip.addUser(user);
-                        /*res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                    // Определяем тип операции ADD или UPD
+                    String res = null;
+                    Document resXml = null;
+                    Element root;
+                    String resultCode;
+                    switch (item.getOperType().toUpperCase()) {
+                        case "I":
+                            res = Eip.addUser(user);
+                            /*res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<response resultCode =\"1\" resultComment=\"Логин создан автоматически\" user=\"petrov-elk-rtk\" dateTime=\"2013-05-08T12:39:00+06:00\"/>";*/
-                        resXml = stringToXml(res);
-                        log.info(resXml);
-                        root = resXml.getDocumentElement();
-                        log.info("resXml = " + utlXML.xmlToString(resXml));
-                        resultCode = root.getAttribute("resultCode");
-                        log.info("resultCode = " + resultCode);
-                        if (resultCode.equals("0")) {
-                            item.setFlag(true);
-                        } else {
-                            item.setFlag(false);
-                            item.setSend_count(item.getSend_count() + 1);
-                        }
-
-                        break;
-                    case "U":
-                        res = Eip.updateUser(user);
-                        /*res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                            resXml = stringToXml(res);
+                            log.info(resXml);
+                            root = resXml.getDocumentElement();
+                            log.info("resXml = " + utlXML.xmlToString(resXml));
+                            resultCode = root.getAttribute("resultCode");
+                            log.info("resultCode = " + resultCode);
+                            if (resultCode.equals("0")) {
+                                item.setFlag(true);
+                            } else {
+                                item.setFlag(false);
+                                item.setSend_count(item.getSend_count() + 1);
+                            }
+                            
+                            break;
+                        case "U":
+                            res = Eip.updateUser(user);
+                            /*res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<response resultCode =\"0\" resultComment=\"Логин создан автоматически\" user=\"petrov-elk-rtk\" dateTime=\"2013-05-08T12:39:00+06:00\"/>";*/
-                        resXml = stringToXml(res);
-                        log.info(resXml);
-                        root = resXml.getDocumentElement();
-                        log.info("resXml = " + utlXML.xmlToString(resXml));
-                        resultCode = root.getAttribute("resultCode");
-                        log.info("resultCode = " + resultCode);
-                        if (resultCode.equals("0")) {
-                            item.setFlag(true);
-                        } else {
-                            item.setFlag(false);
-                            item.setSend_count(item.getSend_count() + 1);
-                        }
-                        break;
-                    case "D":
-                        break;
-                    default: ;
+                            resXml = stringToXml(res);
+                            log.info(resXml);
+                            root = resXml.getDocumentElement();
+                            log.info("resXml = " + utlXML.xmlToString(resXml));
+                            resultCode = root.getAttribute("resultCode");
+                            log.info("resultCode = " + resultCode);
+                            if (resultCode.equals("0")) {
+                                item.setFlag(true);
+                            } else {
+                                item.setFlag(false);
+                                item.setSend_count(item.getSend_count() + 1);
+                            }
+                            break;
+                        case "D":
+                            break;
+                        default: ;
+                        
+                    }
+                } catch (Exception e1) {
+                    log.error(e1.getMessage());
                 }
-
                 // Если получен положительный ответ то ставим отметку об успешной отправке
                 //item.setFlag(true);
                 (new TUsersLogDAO(em)).updateItem(item);
             }
-
+            
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-
+        
     }
-
+    
 }
