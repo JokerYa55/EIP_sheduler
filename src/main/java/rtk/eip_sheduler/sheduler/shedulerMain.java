@@ -33,11 +33,14 @@ public class shedulerMain {
         Logger log = Logger.getLogger(shedulerMain.class.getName());
         try {
             // TODO code application logic here
-
+            // http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1
             log.info("Start");
+            
+            log.info("len = " + args.length);
+            log.info("args = " + args[0]);
             EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
             //em.setProperty(propertyName, log);
-            utlEip Eip = new utlEip(new URL("http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1"));
+            utlEip Eip = new utlEip(new URL(args[0]));
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
             for (TUsersLog item : logItems) {
                 try {
