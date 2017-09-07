@@ -6,12 +6,14 @@
 package rtk.eip_sheduler.sheduler;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import rtk.eip.params.addUserParam;
 import rtk.eip_sheduler.DAO.TUsersDAO;
 import rtk.eip_sheduler.DAO.TUsersLogDAO;
 import rtk.eip_sheduler.XMLUtil.utlXML;
@@ -43,7 +45,16 @@ public class shedulerMain {
             utlEip Eip = new utlEip(new URL(args[0]));
             log.info(Eip);
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
-            for (TUsersLog item : logItems) {
+            
+            addUserParam par1 = new addUserParam();
+            par1.setAutoCreateFlag(0);
+            par1.setDob(new Date());
+            par1.setName("Иванов");
+            par1.setRegion("23");
+            System.out.println(par1.convertObjectToXml()); 
+            
+            
+            /*for (TUsersLog item : logItems) {
                 try {
                     log.info(item);
                     // Получаем данные о пользователе
@@ -57,9 +68,7 @@ public class shedulerMain {
                     String resultCode;
                     switch (item.getOperType().toUpperCase()) {
                         case "I":
-                            res = Eip.addUser(user);
-                            /*res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                + "<response resultCode =\"1\" resultComment=\"Логин создан автоматически\" user=\"petrov-elk-rtk\" dateTime=\"2013-05-08T12:39:00+06:00\"/>";*/
+                            res = Eip.addUser(user);                            
                             resXml = stringToXml(res);
                             log.info(resXml);
                             root = resXml.getDocumentElement();
@@ -75,9 +84,7 @@ public class shedulerMain {
                             
                             break;
                         case "U":
-                            res = Eip.updateUser(user);
-                            /*res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                + "<response resultCode =\"0\" resultComment=\"Логин создан автоматически\" user=\"petrov-elk-rtk\" dateTime=\"2013-05-08T12:39:00+06:00\"/>";*/
+                            res = Eip.updateUser(user);                            
                             resXml = stringToXml(res);
                             log.info(resXml);
                             root = resXml.getDocumentElement();
@@ -102,10 +109,10 @@ public class shedulerMain {
                 // Если получен положительный ответ то ставим отметку об успешной отправке
                 //item.setFlag(true);
                 (new TUsersLogDAO(em)).updateItem(item);
-            }
+            }*/
             
         } catch (Exception e) {
-            log.error(e.getMessage());
+            e.printStackTrace();
         }
         
     }
