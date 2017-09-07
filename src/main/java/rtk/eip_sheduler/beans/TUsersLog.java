@@ -60,6 +60,10 @@ public class TUsersLog implements Serializable {
     private Date dateOper;
     @Column(name = "send_count", nullable = false, columnDefinition = "integer DEFAULT 0")
     private Integer send_count;
+    @Column(name = "info", nullable = true, columnDefinition = "text")
+    private String info;
+    @Column(name = "last_command", nullable = true, columnDefinition = "text")
+    private String last_command;
 
     public TUsersLog() {
     }
@@ -144,17 +148,33 @@ public class TUsersLog implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "TUsersLog{" + "id=" + id + ", flag=" + flag + ", operType=" + operType + ", userId=" + userId + ", username=" + username + ", dateOper=" + dateOper + ", send_count=" + send_count + '}';
-    }
-
     public Integer getSend_count() {
         return send_count;
     }
 
     public void setSend_count(Integer send_count) {
         this.send_count = send_count;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getLast_command() {
+        return last_command;
+    }
+
+    public void setLast_command(String last_command) {
+        this.last_command = last_command;
+    }
+
+    @Override
+    public String toString() {
+        return "TUsersLog{" + "id=" + id + ", flag=" + flag + ", operType=" + operType + ", userId=" + userId + ", username=" + username + ", dateOper=" + dateOper + ", send_count=" + send_count + ", info=" + info + ", last_command=" + last_command + '}';
     }
 
 }
