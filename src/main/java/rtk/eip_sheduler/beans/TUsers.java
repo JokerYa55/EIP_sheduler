@@ -54,13 +54,13 @@ public class TUsers implements Serializable {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
     // Фамилия    
-    @Column(name = "first_name", unique = false, nullable = true)
+    @Column(name = "firstName", unique = false, nullable = true)
     private String first_name;
     // Имя
-    @Column(name = "second_name", unique = false, nullable = true)
+    @Column(name = "lastName", unique = false, nullable = true)
     private String second_name;
     // Отчество
-    @Column(name = "third_name", unique = false, nullable = true)
+    @Column(name = "thirdName", unique = false, nullable = true)
     private String third_name;
     // e-mail
     @Column(name = "email", unique = true, nullable = true)

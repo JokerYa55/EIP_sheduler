@@ -23,8 +23,8 @@ import rtk.eip_sheduler.httpUtil.utlHttp;
  */
 public class utlEip {
 
-    private URL url;
-    private Logger log = Logger.getLogger(getClass().getName());
+    private final URL url;
+    private final Logger log = Logger.getLogger(getClass().getName());
 
     public utlEip(URL url) {
         this.url = url;
@@ -95,7 +95,7 @@ public class utlEip {
             res = http.doPost(url.toString(), dataXml, null);
 
         } catch (Exception e) {
-            log.error(e.getMessage());
+            e.printStackTrace();
         }
         return res;
     }

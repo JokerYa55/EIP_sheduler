@@ -41,6 +41,7 @@ public class shedulerMain {
             EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
             //em.setProperty(propertyName, log);
             utlEip Eip = new utlEip(new URL(args[0]));
+            log.info(Eip);
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
             for (TUsersLog item : logItems) {
                 try {
