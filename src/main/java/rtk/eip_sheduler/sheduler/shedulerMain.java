@@ -37,24 +37,23 @@ public class shedulerMain {
             // TODO code application logic here
             // http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1
             log.info("Start");
-            
+
             log.info("len = " + args.length);
             log.info("args = " + args[0]);
             EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
+            em.setProperty(propertyName, log);
             //em.setProperty(propertyName, log);
             utlEip Eip = new utlEip(new URL(args[0]));
             log.info(Eip);
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
-            
-            addUserParam par1 = new addUserParam();
+
+            /*addUserParam par1 = new addUserParam();
             par1.setAutoCreateFlag(0);
             par1.setDob(new Date());
             par1.setName("Иванов");
             par1.setRegion("23");
-            System.out.println(par1.convertObjectToXml()); 
-            
-            
-            /*for (TUsersLog item : logItems) {
+            System.out.println(par1.convertObjectToXml()); */
+            for (TUsersLog item : logItems) {
                 try {
                     log.info(item);
                     // Получаем данные о пользователе
@@ -68,23 +67,25 @@ public class shedulerMain {
                     String resultCode;
                     switch (item.getOperType().toUpperCase()) {
                         case "I":
-                            res = Eip.addUser(user);                            
+                            res = Eip.addUser(user);
+                            item.setLast_command(res);
                             resXml = stringToXml(res);
                             log.info(resXml);
                             root = resXml.getDocumentElement();
                             log.info("resXml = " + utlXML.xmlToString(resXml));
                             resultCode = root.getAttribute("resultCode");
-                            log.info("resultCode = " + resultCode);
+                            log.info("resultCode = " + resultCode);                            
                             if (resultCode.equals("0")) {
                                 item.setFlag(true);
                             } else {
                                 item.setFlag(false);
                                 item.setSend_count(item.getSend_count() + 1);
                             }
-                            
+
                             break;
                         case "U":
-                            res = Eip.updateUser(user);                            
+                            res = Eip.updateUser(user);
+                            item.setLast_command(res);
                             resXml = stringToXml(res);
                             log.info(resXml);
                             root = resXml.getDocumentElement();
@@ -101,7 +102,7 @@ public class shedulerMain {
                         case "D":
                             break;
                         default: ;
-                        
+
                     }
                 } catch (Exception e1) {
                     log.error(e1.getMessage());
@@ -109,12 +110,12 @@ public class shedulerMain {
                 // Если получен положительный ответ то ставим отметку об успешной отправке
                 //item.setFlag(true);
                 (new TUsersLogDAO(em)).updateItem(item);
-            }*/
-            
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
 }
