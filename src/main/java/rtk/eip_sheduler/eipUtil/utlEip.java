@@ -115,9 +115,7 @@ public class utlEip {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.newDocument();
             Element rootElement = doc.createElement("request");
-            /*
-            user="petrov" surname="Петров" name="Петр" patronymic="Иванович" dob="1985-08-08T00:00:00+06:00" region="23" contactEmail="petrov@gmail.com" contactPhone="9652323232"
-             */
+
             rootElement.setAttribute("reqType", "EDIT_USER");
             rootElement.setAttribute("user", user.getUsername());
             if (user.getFirst_name() != null) {
