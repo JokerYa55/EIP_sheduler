@@ -26,7 +26,7 @@ import org.apache.log4j.Logger;
  */
 @NamedQueries({
     @NamedQuery(name = "TUsers.findAll", query = "SELECT t FROM TUsers t where t.user_status = 0")
-    , @NamedQuery(name = "TUsers.findById", query = "SELECT t FROM TUsers t WHERE t.id = :id and t.user_status = 0")
+    , @NamedQuery(name = "TUsers.findById", query = "SELECT t FROM TUsers t WHERE t.id = :id")
     //, @NamedQuery(name = "TUsers.findByAddress", query = "SELECT t FROM TUsers t WHERE t.address = :address and t.user_status = 0")
     , @NamedQuery(name = "TUsers.findByEmail", query = "SELECT t FROM TUsers t WHERE t.email = :email and t.user_status = 0")
     , @NamedQuery(name = "TUsers.findByHashType", query = "SELECT t FROM TUsers t WHERE t.hesh_type = :hashType and t.user_status = 0")
