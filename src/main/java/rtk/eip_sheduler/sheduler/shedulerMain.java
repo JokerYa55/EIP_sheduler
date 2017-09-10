@@ -40,8 +40,7 @@ public class shedulerMain {
 
             log.info("len = " + args.length);
             log.info("args = " + args[0]);
-            EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
-            em.setProperty(propertyName, log);
+            EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();            
             //em.setProperty(propertyName, log);
             utlEip Eip = new utlEip(new URL(args[0]));
             log.info(Eip);
