@@ -34,19 +34,19 @@ public class shedulerMain {
         try {
             // TODO code application logic here
             // http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1
-            log.info("Start");
+            log.debug("Start");
 
-            log.info("len = " + args.length);
-            log.info("args = " + args[0]);
+            log.debug("len = " + args.length);
+            log.debug("args = " + args[0]);
             EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();            
             //em.setProperty(propertyName, log);
             utlEip Eip = new utlEip(new URL(args[0]));
-            log.info(Eip);
+            log.debug(Eip);
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList("TUsersLog.findByNoSend", TUsersLog.class);
 
             for (TUsersLog item : logItems) {
                 try {
-                    log.info(item);
+                    log.debug(item);
                     // Получаем данные о пользователе
                     userEntity user = (new TUsersDAO(em)).getItem(item.getUserId(), "userEntity.findById", userEntity.class);
                     log.debug(user);
@@ -61,11 +61,11 @@ public class shedulerMain {
                             res = Eip.addUser(user);
                             item.setLast_command(res);
                             resXml = stringToXml(res);
-                            log.info(resXml);
+                            log.debug(resXml);
                             root = resXml.getDocumentElement();
-                            log.info("resXml = " + utlXML.xmlToString(resXml));
+                            log.debug("resXml = " + utlXML.xmlToString(resXml));
                             resultCode = root.getAttribute("resultCode");
-                            log.info("resultCode = " + resultCode);                            
+                            log.debug("resultCode = " + resultCode);                            
                             if (resultCode.equals("0")) {
                                 item.setFlag(true);
                             } else {
@@ -78,11 +78,11 @@ public class shedulerMain {
                             res = Eip.updateUser(user);
                             item.setLast_command(res);
                             resXml = stringToXml(res);
-                            log.info(resXml);
+                            log.debug(resXml);
                             root = resXml.getDocumentElement();
-                            log.info("resXml = " + utlXML.xmlToString(resXml));
+                            log.debug("resXml = " + utlXML.xmlToString(resXml));
                             resultCode = root.getAttribute("resultCode");
-                            log.info("resultCode = " + resultCode);
+                            log.debug("resultCode = " + resultCode);
                             if (resultCode.equals("0")) {
                                 item.setFlag(true);
                             } else {

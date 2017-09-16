@@ -14,6 +14,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import rtk.eip.params.addUserParam;
+import rtk.eip_sheduler.XMLUtil.utlXML;
 import static rtk.eip_sheduler.XMLUtil.utlXML.xmlToString;
 import rtk.eip_sheduler.httpUtil.utlHttp;
 
@@ -36,18 +38,18 @@ public class utlEip {
      * @return
      */
     public String addUser(userEntity user) {
-        log.info("addUser");
+        log.debug("addUser");
         String res = null;
         try {
             // Добавляем XML
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            /*DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.newDocument();
             Element rootElement = doc.createElement("request");
             /*
             user="petrov" surname="Петров" name="Петр" patronymic="Иванович" dob="1985-08-08T00:00:00+06:00" region="23" contactEmail="petrov@gmail.com" contactPhone="9652323232"
              */
-            rootElement.setAttribute("reqType", "CREATE_USER");
+ /*rootElement.setAttribute("reqType", "CREATE_USER");
             rootElement.setAttribute("user", user.getUsername());
             if (user.getFirstName() != null) {
                 rootElement.setAttribute("surname", user.getFirstName());
@@ -79,19 +81,39 @@ public class utlEip {
                 rootElement.setAttribute("contactPhone", user.getPhone());
             } else {
                 rootElement.setAttribute("contactPhone", "");
-            }
+            }*/
 //            if (user.getDate_birthday() != null) {
 //                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
 //            } else {
 //                rootElement.setAttribute("dob", "");
 //            }
 
-            doc.appendChild(rootElement);
+            /*doc.appendChild(rootElement);
 
             String dataXml = xmlToString(doc);
             log.debug(dataXml);
 
             utlHttp http = new utlHttp();
+            res = http.doPost(url.toString(), dataXml, null);*/
+            addUserParam param = new addUserParam();
+            param.setContactEmail(user.getEmail());
+            param.setContactPhone(user.getPhone());
+            param.setReqType("CREATE_USER_PASSWORD");
+            param.setSalt(user.getSalt());
+            param.setHash(user.getPassword());
+            param.setHash_type(user.getHesh_type());
+            param.setUser(user.getUsername());
+            param.setSurname(user.getFirstName());
+            param.setName(user.getLastName());
+            param.setPatronymic(user.getThirdName());
+            if (user.getUser_region() != null) {
+                param.setRegion(user.getUser_region().toString());
+            }
+
+            utlHttp http = new utlHttp();
+            utlXML utlxml = new utlXML();
+
+            String dataXml = utlxml.convertObjectToXml(param);
             res = http.doPost(url.toString(), dataXml, null);
 
         } catch (Exception e) {
@@ -106,7 +128,7 @@ public class utlEip {
      * @return
      */
     public String updateUser(userEntity user) {
-        log.info("updateUser");
+        log.debug("updateUser");
         String res = null;
 
         try {
@@ -124,7 +146,7 @@ public class utlEip {
                 rootElement.setAttribute("surname", "");
             }
 
-            if (user.getLastName()!= null) {
+            if (user.getLastName() != null) {
                 rootElement.setAttribute("name", user.getLastName());
             } else {
                 rootElement.setAttribute("name", "");

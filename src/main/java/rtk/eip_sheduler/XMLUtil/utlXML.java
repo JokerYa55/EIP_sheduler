@@ -5,7 +5,6 @@
  */
 package rtk.eip_sheduler.XMLUtil;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
@@ -14,7 +13,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -23,7 +21,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-import rtk.eip.params.result;
 
 /**
  *
@@ -73,7 +70,7 @@ public class utlXML<T> {
 
             // маршаллинг объекта в строку
             StringWriter sw = new StringWriter();
-            marshaller.marshal(this, sw);
+            marshaller.marshal(t, sw);
             return sw.toString();
         } catch (JAXBException e) {
             e.printStackTrace();
