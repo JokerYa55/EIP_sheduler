@@ -62,7 +62,11 @@ public class utlXML<T> {
         }
     }
     
-    
+    /**
+     * 
+     * @param t
+     * @return 
+     */
      public  String convertObjectToXml(T t) {
         try {
             JAXBContext context = JAXBContext.newInstance(t.getClass());
@@ -80,6 +84,11 @@ public class utlXML<T> {
         return null;
     }
 
+     /**
+      * 
+      * @param xml
+      * @return 
+      */
     public T convertFromXml(String xml) {
         T res = null;
         try {

@@ -6,8 +6,6 @@
 package rtk.eip_sheduler.eipUtil;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import rtk.eip_sheduler.beans.userEntity;
 //import javax.xml.parsers.DocumentBuilder;
 //import javax.xml.parsers.DocumentBuilderFactory;

@@ -6,7 +6,10 @@
 package rtk.eip_sheduler.sheduler;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
@@ -34,11 +37,12 @@ public class shedulerMain {
         try {
             // TODO code application logic here
             // http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1
-            log.debug("Start");
+            log.debug("***************************************************************************************");
+            log.debug("Start => " + (new Date()).toString());
 
-            log.debug("len = " + args.length);
-            log.debug("args = " + args[0]);
-            EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();            
+            //log.debug("len = " + args.length);
+            log.debug("url = " + args[0]);
+            EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
             //em.setProperty(propertyName, log);
             utlEip Eip = new utlEip(new URL(args[0]));
             log.debug(Eip);
@@ -65,7 +69,7 @@ public class shedulerMain {
                             root = resXml.getDocumentElement();
                             log.debug("resXml = " + utlXML.xmlToString(resXml));
                             resultCode = root.getAttribute("resultCode");
-                            log.debug("resultCode = " + resultCode);                            
+                            log.debug("resultCode = " + resultCode);
                             if (resultCode.equals("0")) {
                                 item.setFlag(true);
                             } else {
@@ -75,6 +79,10 @@ public class shedulerMain {
 
                             break;
                         case "U":
+                            // Если поменялся пароль
+//                            Pattern p = Pattern.compile("^(<\\w+>)*$");
+//                            Matcher m = p.matcher(item.getInfo());
+
                             res = Eip.updateUser(user);
                             item.setLast_command(res);
                             resXml = stringToXml(res);
@@ -88,6 +96,24 @@ public class shedulerMain {
                             } else {
                                 item.setFlag(false);
                                 item.setSend_count(item.getSend_count() + 1);
+                            }
+
+                            // Обновляем если пароль
+                            if (item.getInfo().contains("<password>")) {
+                                res = Eip.changePassword(user);
+                                item.setLast_command(res);
+                                resXml = stringToXml(res);
+                                log.debug(resXml);
+                                root = resXml.getDocumentElement();
+                                log.debug("resXml = " + utlXML.xmlToString(resXml));
+                                resultCode = root.getAttribute("resultCode");
+                                log.debug("resultCode = " + resultCode);
+                                if (resultCode.equals("0")) {
+                                    item.setFlag(true);
+                                } else {
+                                    item.setFlag(false);
+                                    item.setSend_count(item.getSend_count() + 1);
+                                }
                             }
                             break;
                         case "D":
