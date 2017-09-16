@@ -30,34 +30,34 @@ public class TUsersDAO implements daoInterface<userEntity, Long> {
         return this.em;
     }
 
-    @Override
-    public userEntity getItem(Long id) {
-        userEntity res = null;
-        try {
-            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findById", userEntity.class);
-            namedQuery.setParameter("id", id);
-            res = namedQuery.getSingleResult();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return res;
-    }
-
-    @Override
-    public List<userEntity> getList() {
-        List<userEntity> res = null;
-        try {
-            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findAll", userEntity.class);
-            res = namedQuery.getResultList();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return res;
-    }
-
-    @Override
-    public List<userEntity> getList(Long startIdx, Long stopIdx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public userEntity getItem(Long id) {
+//        userEntity res = null;
+//        try {
+//            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findById", userEntity.class);
+//            namedQuery.setParameter("id", id);
+//            res = namedQuery.getSingleResult();
+//        } catch (Exception e) {
+//            log.error(e.getMessage());
+//        }
+//        return res;
+//    }
+//
+//    @Override
+//    public List<userEntity> getList() {
+//        List<userEntity> res = null;
+//        try {
+//            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findAll", userEntity.class);
+//            res = namedQuery.getResultList();
+//        } catch (Exception e) {
+//            log.error(e.getMessage());
+//        }
+//        return res;
+//    }
+//
+//    @Override
+//    public List<userEntity> getList(Long startIdx, Long stopIdx) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
 }

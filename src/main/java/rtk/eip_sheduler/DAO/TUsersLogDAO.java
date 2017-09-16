@@ -30,36 +30,36 @@ public class TUsersLogDAO implements daoInterface<TUsersLog, Long> {
         return this.em;
     }
 
-    @Override
-    public TUsersLog getItem(Long id) {
-        TUsersLog res = null;
-        try {
-             TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findById", TUsersLog.class);
-             namedQuery.setParameter("id", id);
-             res = namedQuery.getSingleResult();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return res;
-    }
-
-    @Override
-    public List<TUsersLog> getList() {
-        log.debug("getList");
-        List<TUsersLog> res = null;
-        try {
-             TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findAll", TUsersLog.class);
-             namedQuery.setParameter("send_count", 10);
-             res = namedQuery.getResultList();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return res;
-    }
-
-    @Override
-    public List<TUsersLog> getList(Long startIdx, Long stopIdx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public TUsersLog getItem(Long id) {
+//        TUsersLog res = null;
+//        try {
+//             TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findById", TUsersLog.class);
+//             namedQuery.setParameter("id", id);
+//             res = namedQuery.getSingleResult();
+//        } catch (Exception e) {
+//            log.error(e.getMessage());
+//        }
+//        return res;
+//    }
+//
+//    @Override
+//    public List<TUsersLog> getList() {
+//        log.debug("getList");
+//        List<TUsersLog> res = null;
+//        try {
+//             TypedQuery<TUsersLog> namedQuery = em.createNamedQuery("TUsersLog.findAll", TUsersLog.class);
+//             namedQuery.setParameter("send_count", 10);
+//             res = namedQuery.getResultList();
+//        } catch (Exception e) {
+//            log.error(e.getMessage());
+//        }
+//        return res;
+//    }
+//
+//    @Override
+//    public List<TUsersLog> getList(Long startIdx, Long stopIdx) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
 }

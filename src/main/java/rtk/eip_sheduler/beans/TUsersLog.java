@@ -30,6 +30,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "TUsersLog.findAll", query = "SELECT t FROM TUsersLog t where t.flag = false and t.send_count<=:send_count")
     , @NamedQuery(name = "TUsersLog.findById", query = "SELECT t FROM TUsersLog t WHERE t.id = :id and t.flag = false and t.send_count<=:send_count")
     , @NamedQuery(name = "TUsersLog.findByFlag", query = "SELECT t FROM TUsersLog t WHERE t.flag = :flag and t.send_count<=:send_count")
+    , @NamedQuery(name = "TUsersLog.findByNoSend", query = "SELECT t FROM TUsersLog t WHERE t.flag = false and t.send_count<=10")    
     , @NamedQuery(name = "TUsersLog.findByOperType", query = "SELECT t FROM TUsersLog t WHERE t.operType = :operType and t.flag = false and t.send_count<=:send_count")
     , @NamedQuery(name = "TUsersLog.findByUserId", query = "SELECT t FROM TUsersLog t WHERE t.userId = :userId and t.flag = false and t.send_count<=:send_count")
     , @NamedQuery(name = "TUsersLog.findByUsername", query = "SELECT t FROM TUsersLog t WHERE t.username = :username and t.flag = false and t.send_count<=:send_count")

@@ -42,13 +42,13 @@ public class shedulerMain {
             //em.setProperty(propertyName, log);
             utlEip Eip = new utlEip(new URL(args[0]));
             log.info(Eip);
-            List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
+            List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList("TUsersLog.findByNoSend", TUsersLog.class);
 
             for (TUsersLog item : logItems) {
                 try {
                     log.info(item);
                     // Получаем данные о пользователе
-                    userEntity user = (new TUsersDAO(em)).getItem(item.getUserId());
+                    userEntity user = (new TUsersDAO(em)).getItem(item.getUserId(), "userEntity.findById", userEntity.class);
                     log.debug(user);
 
                     // Определяем тип операции ADD или UPD
