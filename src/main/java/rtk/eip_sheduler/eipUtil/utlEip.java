@@ -9,14 +9,16 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import rtk.eip_sheduler.beans.userEntity;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+//import javax.xml.parsers.DocumentBuilder;
+//import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+//import org.w3c.dom.Document;
+//import org.w3c.dom.Element;
 import rtk.eip.params.addUserParam;
+import rtk.eip.params.changePasswordParam;
+import rtk.eip.params.updUserParam;
 import rtk.eip_sheduler.XMLUtil.utlXML;
-import static rtk.eip_sheduler.XMLUtil.utlXML.xmlToString;
+//import static rtk.eip_sheduler.XMLUtil.utlXML.xmlToString;
 import rtk.eip_sheduler.httpUtil.utlHttp;
 
 /**
@@ -114,6 +116,7 @@ public class utlEip {
             utlXML utlxml = new utlXML();
 
             String dataXml = utlxml.convertObjectToXml(param);
+            log.debug("dataXml => " + dataXml);
             res = http.doPost(url.toString(), dataXml, null);
 
         } catch (Exception e) {
@@ -133,57 +136,94 @@ public class utlEip {
 
         try {
             // Добавляем XML
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.newDocument();
-            Element rootElement = doc.createElement("request");
+            //            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            //            DocumentBuilder db = dbf.newDocumentBuilder();
+            //            Document doc = db.newDocument();
+            //            Element rootElement = doc.createElement("request");
+            //
+            //            rootElement.setAttribute("reqType", "EDIT_USER");
+            //            rootElement.setAttribute("user", user.getUsername());
+            //            if (user.getFirstName() != null) {
+            //                rootElement.setAttribute("surname", user.getFirstName());
+            //            } else {
+            //                rootElement.setAttribute("surname", "");
+            //            }
+            //
+            //            if (user.getLastName() != null) {
+            //                rootElement.setAttribute("name", user.getLastName());
+            //            } else {
+            //                rootElement.setAttribute("name", "");
+            //            }
+            //            if (user.getThirdName() != null) {
+            //                rootElement.setAttribute("patronymic", user.getThirdName());
+            //            } else {
+            //                rootElement.setAttribute("patronymic", "");
+            //            }
+            //            if (user.getUser_region() != null) {
+            //                rootElement.setAttribute("region", user.getUser_region().toString());
+            //            } else {
+            //                rootElement.setAttribute("region", "");
+            //            }
+            //            if (user.getEmail() != null) {
+            //                rootElement.setAttribute("contactEmail", user.getEmail());
+            //            } else {
+            //                rootElement.setAttribute("contactEmail", "");
+            //            }
+            //            if (user.getPhone() != null) {
+            //                rootElement.setAttribute("contactPhone", user.getPhone());
+            //            } else {
+            //                rootElement.setAttribute("contactPhone", "");
+            //            }
+            //
+            //
+            //            doc.appendChild(rootElement);
 
-            rootElement.setAttribute("reqType", "EDIT_USER");
-            rootElement.setAttribute("user", user.getUsername());
-            if (user.getFirstName() != null) {
-                rootElement.setAttribute("surname", user.getFirstName());
-            } else {
-                rootElement.setAttribute("surname", "");
-            }
-
-            if (user.getLastName() != null) {
-                rootElement.setAttribute("name", user.getLastName());
-            } else {
-                rootElement.setAttribute("name", "");
-            }
-            if (user.getThirdName() != null) {
-                rootElement.setAttribute("patronymic", user.getThirdName());
-            } else {
-                rootElement.setAttribute("patronymic", "");
-            }
-            if (user.getUser_region() != null) {
-                rootElement.setAttribute("region", user.getUser_region().toString());
-            } else {
-                rootElement.setAttribute("region", "");
-            }
+            //            String dataXml = xmlToString(doc);
+            //            log.debug(dataXml);
+            //            utlHttp http = new utlHttp();
+            //            res = http.doPost(url.toString(), dataXml, null);
+            updUserParam param = new updUserParam();
             if (user.getEmail() != null) {
-                rootElement.setAttribute("contactEmail", user.getEmail());
-            } else {
-                rootElement.setAttribute("contactEmail", "");
+                param.setContactEmail(user.getEmail());
             }
             if (user.getPhone() != null) {
-                rootElement.setAttribute("contactPhone", user.getPhone());
-            } else {
-                rootElement.setAttribute("contactPhone", "");
+                param.setContactPhone(user.getPhone());
             }
-//            if (user.getDate_birthday() != null) {
-//                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
-//            } else {
-//                rootElement.setAttribute("dob", "");
-//            }
 
-            doc.appendChild(rootElement);
-
-            String dataXml = xmlToString(doc);
-            log.debug(dataXml);
+            param.setReqType("EDIT_USER");
+            if (user.getUsername() != null) {
+                param.setUser(user.getUsername());
+            }
+            if (user.getFirstName() != null) {
+                param.setSurname(user.getFirstName());
+            }
+            if (user.getLastName() != null) {
+                param.setName(user.getLastName());
+            }
+            if (user.getThirdName() != null) {
+                param.setPatronymic(user.getThirdName());
+            }
+            if (user.getUser_region() != null) {
+                param.setRegion(user.getUser_region().toString());
+            }
 
             utlHttp http = new utlHttp();
+            utlXML utlxml = new utlXML();
+            String dataXml = utlxml.convertObjectToXml(param);
+            log.debug("dataXml => " + dataXml);
             res = http.doPost(url.toString(), dataXml, null);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return res;
+    }
+
+    public String changePassword(userEntity user) {
+        log.debug("changePassword => " + user);
+        String res = null;
+        try {
+            changePasswordParam param = new changePasswordParam();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
