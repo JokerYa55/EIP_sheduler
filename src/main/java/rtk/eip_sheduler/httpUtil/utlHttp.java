@@ -45,13 +45,12 @@ public class utlHttp {
             HttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
 
             //Gson gson = new Gson();
-
             HttpPost post = new HttpPost(url);
             // Добавляем данные в формате xml
 
             //StringEntity postingString = new StringEntity("contactEmail=andr_vasil@mail.ru", "text/plain", "UTF-8");
             StringEntity postingString = new StringEntity((String) params, "application/xml", "UTF-8");
-            log.info(postingString.toString());
+            log.debug(postingString.toString());
             post.setEntity(postingString);
 
             if (headerList != null) {
@@ -162,18 +161,9 @@ public class utlHttp {
                 json.append(line);
             }
 
-           log.info("json = " + json.toString());
+            log.debug("json = " + json.toString());
             res = json.toString();
-            /*org.json.simple.parser.JSONParser parser = new JSONParser();
-            Object obj = parser.parse(json.toString());
-            try {
-                JSONObject jsonObj = (JSONObject) obj;
-                res = jsonObj;
-            } catch (Exception e) {
-                JSONArray jsonArr = (JSONArray) obj;
-                System.out.println("arr = " + jsonArr.toJSONString() );
-            }
-            System.out.println("res = " + res.toJSONString());*/
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
