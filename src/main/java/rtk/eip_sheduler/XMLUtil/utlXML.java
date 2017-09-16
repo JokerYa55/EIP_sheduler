@@ -8,6 +8,10 @@ package rtk.eip_sheduler.XMLUtil;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,12 +23,13 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+import rtk.eip.params.result;
 
 /**
  *
  * @author vasil
  */
-public class utlXML {
+public class utlXML<T> {
 
     /**
      *
@@ -56,5 +61,38 @@ public class utlXML {
         } catch (Exception ex) {
             return null;
         }
+    }
+    
+    
+     public  String convertObjectToXml(T t) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(t.getClass());
+            Marshaller marshaller = context.createMarshaller();
+            // устанавливаем флаг для читабельного вывода XML в JAXB
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            // маршаллинг объекта в строку
+            StringWriter sw = new StringWriter();
+            marshaller.marshal(this, sw);
+            return sw.toString();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public T convertFromXml(String xml) {
+        T res = null;
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(res.getClass());
+
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            StringReader sw = new StringReader(xml);
+            //sw.write(xml);
+            res = (T) jaxbUnmarshaller.unmarshal(sw);
+            System.out.println(res);
+        } catch (Exception e) {
+        }
+        return res;
     }
 }

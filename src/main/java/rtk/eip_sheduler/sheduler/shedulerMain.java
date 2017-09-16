@@ -6,19 +6,17 @@
 package rtk.eip_sheduler.sheduler;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import rtk.eip.params.addUserParam;
 import rtk.eip_sheduler.DAO.TUsersDAO;
 import rtk.eip_sheduler.DAO.TUsersLogDAO;
 import rtk.eip_sheduler.XMLUtil.utlXML;
 import static rtk.eip_sheduler.XMLUtil.utlXML.stringToXml;
-import rtk.eip_sheduler.beans.TUsers;
+import rtk.eip_sheduler.beans.userEntity;
 import rtk.eip_sheduler.beans.TUsersLog;
 import rtk.eip_sheduler.eipUtil.utlEip;
 
@@ -46,17 +44,11 @@ public class shedulerMain {
             log.info(Eip);
             List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList();
 
-            /*addUserParam par1 = new addUserParam();
-            par1.setAutoCreateFlag(0);
-            par1.setDob(new Date());
-            par1.setName("Иванов");
-            par1.setRegion("23");
-            System.out.println(par1.convertObjectToXml()); */
             for (TUsersLog item : logItems) {
                 try {
                     log.info(item);
                     // Получаем данные о пользователе
-                    TUsers user = (new TUsersDAO(em)).getItem(item.getUserId());
+                    userEntity user = (new TUsersDAO(em)).getItem(item.getUserId());
                     log.debug(user);
 
                     // Определяем тип операции ADD или UPD

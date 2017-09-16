@@ -8,7 +8,7 @@ package rtk.eip_sheduler.eipUtil;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import rtk.eip_sheduler.beans.TUsers;
+import rtk.eip_sheduler.beans.userEntity;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
@@ -35,7 +35,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String addUser(TUsers user) {
+    public String addUser(userEntity user) {
         log.info("addUser");
         String res = null;
         try {
@@ -49,19 +49,19 @@ public class utlEip {
              */
             rootElement.setAttribute("reqType", "CREATE_USER");
             rootElement.setAttribute("user", user.getUsername());
-            if (user.getFirst_name() != null) {
-                rootElement.setAttribute("surname", user.getFirst_name());
+            if (user.getFirstName() != null) {
+                rootElement.setAttribute("surname", user.getFirstName());
             } else {
                 rootElement.setAttribute("surname", "");
             }
 
-            if (user.getSecond_name() != null) {
-                rootElement.setAttribute("name", user.getSecond_name());
+            if (user.getLastName()!= null) {
+                rootElement.setAttribute("name", user.getLastName());
             } else {
                 rootElement.setAttribute("name", "");
             }
-            if (user.getThird_name() != null) {
-                rootElement.setAttribute("patronymic", user.getThird_name());
+            if (user.getThirdName() != null) {
+                rootElement.setAttribute("patronymic", user.getThirdName());
             } else {
                 rootElement.setAttribute("patronymic", "");
             }
@@ -105,7 +105,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String updateUser(TUsers user) {
+    public String updateUser(userEntity user) {
         log.info("updateUser");
         String res = null;
 
@@ -118,19 +118,19 @@ public class utlEip {
 
             rootElement.setAttribute("reqType", "EDIT_USER");
             rootElement.setAttribute("user", user.getUsername());
-            if (user.getFirst_name() != null) {
-                rootElement.setAttribute("surname", user.getFirst_name());
+            if (user.getFirstName() != null) {
+                rootElement.setAttribute("surname", user.getFirstName());
             } else {
                 rootElement.setAttribute("surname", "");
             }
 
-            if (user.getSecond_name() != null) {
-                rootElement.setAttribute("name", user.getSecond_name());
+            if (user.getLastName()!= null) {
+                rootElement.setAttribute("name", user.getLastName());
             } else {
                 rootElement.setAttribute("name", "");
             }
-            if (user.getThird_name() != null) {
-                rootElement.setAttribute("patronymic", user.getThird_name());
+            if (user.getThirdName() != null) {
+                rootElement.setAttribute("patronymic", user.getThirdName());
             } else {
                 rootElement.setAttribute("patronymic", "");
             }

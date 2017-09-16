@@ -18,8 +18,8 @@ import rtk.eip_sheduler.interfaces.daoInterface;
  */
 public class TUsersLogDAO implements daoInterface<TUsersLog, Long> {
 
-    private EntityManager em;
-    private Logger log = Logger.getLogger(getClass().getName());
+    private final EntityManager em;
+    private final Logger log = Logger.getLogger(getClass().getName());
 
     public TUsersLogDAO(EntityManager em) {
         this.em = em;

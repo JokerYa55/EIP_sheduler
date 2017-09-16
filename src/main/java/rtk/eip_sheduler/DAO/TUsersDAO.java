@@ -9,14 +9,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
-import rtk.eip_sheduler.beans.TUsers;
+import rtk.eip_sheduler.beans.userEntity;
 import rtk.eip_sheduler.interfaces.daoInterface;
 
 /**
  *
  * @author vasil
  */
-public class TUsersDAO implements daoInterface<TUsers, Long> {
+public class TUsersDAO implements daoInterface<userEntity, Long> {
 
     private EntityManager em;
     private Logger log = Logger.getLogger(getClass().getName());
@@ -31,10 +31,10 @@ public class TUsersDAO implements daoInterface<TUsers, Long> {
     }
 
     @Override
-    public TUsers getItem(Long id) {
-        TUsers res = null;
+    public userEntity getItem(Long id) {
+        userEntity res = null;
         try {
-            TypedQuery<TUsers> namedQuery = em.createNamedQuery("TUsers.findById", TUsers.class);
+            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findById", userEntity.class);
             namedQuery.setParameter("id", id);
             res = namedQuery.getSingleResult();
         } catch (Exception e) {
@@ -44,10 +44,10 @@ public class TUsersDAO implements daoInterface<TUsers, Long> {
     }
 
     @Override
-    public List<TUsers> getList() {
-        List<TUsers> res = null;
+    public List<userEntity> getList() {
+        List<userEntity> res = null;
         try {
-            TypedQuery<TUsers> namedQuery = em.createNamedQuery("TUsers.findAll", TUsers.class);
+            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findAll", userEntity.class);
             res = namedQuery.getResultList();
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -56,7 +56,7 @@ public class TUsersDAO implements daoInterface<TUsers, Long> {
     }
 
     @Override
-    public List<TUsers> getList(Long startIdx, Long stopIdx) {
+    public List<userEntity> getList(Long startIdx, Long stopIdx) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
