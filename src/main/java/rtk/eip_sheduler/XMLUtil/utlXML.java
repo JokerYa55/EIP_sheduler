@@ -7,6 +7,8 @@ package rtk.eip_sheduler.XMLUtil;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -89,6 +91,27 @@ public class utlXML<T> {
             res = (T) jaxbUnmarshaller.unmarshal(sw);
             System.out.println(res);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
+    
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public static String formatDateForXML(Date date) {
+        String res = null;
+        try {
+            SimpleDateFormat dateFormatYear = new SimpleDateFormat("YYYY-MM-dd'T'HH-mm-ssZZ");
+            StringBuilder temp = new StringBuilder();
+            temp.append(dateFormatYear.format(date));
+            temp.insert(temp.length() - 2, ":");
+            res = temp.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return res;
     }

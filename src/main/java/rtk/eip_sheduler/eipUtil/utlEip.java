@@ -43,60 +43,6 @@ public class utlEip {
         log.debug("addUser");
         String res = null;
         try {
-            // Добавляем XML
-            /*DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.newDocument();
-            Element rootElement = doc.createElement("request");
-            /*
-            user="petrov" surname="Петров" name="Петр" patronymic="Иванович" dob="1985-08-08T00:00:00+06:00" region="23" contactEmail="petrov@gmail.com" contactPhone="9652323232"
-             */
- /*rootElement.setAttribute("reqType", "CREATE_USER");
-            rootElement.setAttribute("user", user.getUsername());
-            if (user.getFirstName() != null) {
-                rootElement.setAttribute("surname", user.getFirstName());
-            } else {
-                rootElement.setAttribute("surname", "");
-            }
-
-            if (user.getLastName()!= null) {
-                rootElement.setAttribute("name", user.getLastName());
-            } else {
-                rootElement.setAttribute("name", "");
-            }
-            if (user.getThirdName() != null) {
-                rootElement.setAttribute("patronymic", user.getThirdName());
-            } else {
-                rootElement.setAttribute("patronymic", "");
-            }
-            if (user.getUser_region() != null) {
-                rootElement.setAttribute("region", user.getUser_region().toString());
-            } else {
-                rootElement.setAttribute("region", "");
-            }
-            if (user.getEmail() != null) {
-                rootElement.setAttribute("contactEmail", user.getEmail());
-            } else {
-                rootElement.setAttribute("contactEmail", "");
-            }
-            if (user.getPhone() != null) {
-                rootElement.setAttribute("contactPhone", user.getPhone());
-            } else {
-                rootElement.setAttribute("contactPhone", "");
-            }*/
-//            if (user.getDate_birthday() != null) {
-//                rootElement.setAttribute("dob", formatDateForXML(user.getDate_birthday()));
-//            } else {
-//                rootElement.setAttribute("dob", "");
-//            }
-
-            /*doc.appendChild(rootElement);
-
-            String dataXml = xmlToString(doc);
-            log.debug(dataXml);
-
-            utlHttp http = new utlHttp();
-            res = http.doPost(url.toString(), dataXml, null);*/
             addUserParam param = new addUserParam();
             param.setContactEmail(user.getEmail());
             param.setContactPhone(user.getPhone());
@@ -135,53 +81,6 @@ public class utlEip {
         String res = null;
 
         try {
-            // Добавляем XML
-            //            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            //            DocumentBuilder db = dbf.newDocumentBuilder();
-            //            Document doc = db.newDocument();
-            //            Element rootElement = doc.createElement("request");
-            //
-            //            rootElement.setAttribute("reqType", "EDIT_USER");
-            //            rootElement.setAttribute("user", user.getUsername());
-            //            if (user.getFirstName() != null) {
-            //                rootElement.setAttribute("surname", user.getFirstName());
-            //            } else {
-            //                rootElement.setAttribute("surname", "");
-            //            }
-            //
-            //            if (user.getLastName() != null) {
-            //                rootElement.setAttribute("name", user.getLastName());
-            //            } else {
-            //                rootElement.setAttribute("name", "");
-            //            }
-            //            if (user.getThirdName() != null) {
-            //                rootElement.setAttribute("patronymic", user.getThirdName());
-            //            } else {
-            //                rootElement.setAttribute("patronymic", "");
-            //            }
-            //            if (user.getUser_region() != null) {
-            //                rootElement.setAttribute("region", user.getUser_region().toString());
-            //            } else {
-            //                rootElement.setAttribute("region", "");
-            //            }
-            //            if (user.getEmail() != null) {
-            //                rootElement.setAttribute("contactEmail", user.getEmail());
-            //            } else {
-            //                rootElement.setAttribute("contactEmail", "");
-            //            }
-            //            if (user.getPhone() != null) {
-            //                rootElement.setAttribute("contactPhone", user.getPhone());
-            //            } else {
-            //                rootElement.setAttribute("contactPhone", "");
-            //            }
-            //
-            //
-            //            doc.appendChild(rootElement);
-
-            //            String dataXml = xmlToString(doc);
-            //            log.debug(dataXml);
-            //            utlHttp http = new utlHttp();
-            //            res = http.doPost(url.toString(), dataXml, null);
             updUserParam param = new updUserParam();
             if (user.getEmail() != null) {
                 param.setContactEmail(user.getEmail());
@@ -219,34 +118,31 @@ public class utlEip {
         return res;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public String changePassword(userEntity user) {
         log.debug("changePassword => " + user);
         String res = null;
         try {
             changePasswordParam param = new changePasswordParam();
+            param.setHash(user.getPassword());
+            param.setHashType(user.getHesh_type());
+            param.setReqType("CHANGE_PASSWORD");
+            param.setSalt(user.getSalt());
+            param.setUser(user.getUsername());
+
+            utlHttp http = new utlHttp();
+            utlXML utlxml = new utlXML();
+            String dataXml = utlxml.convertObjectToXml(param);
+            log.debug("dataXml => " + dataXml);
+            res = http.doPost(url.toString(), dataXml, null);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
         return res;
     }
 
-    /**
-     *
-     * @param date
-     * @return
-     */
-    private String formatDateForXML(Date date) {
-        String res = null;
-        try {
-            SimpleDateFormat dateFormatYear = new SimpleDateFormat("YYYY-MM-dd'T'HH-mm-ssZZ");
-            StringBuilder temp = new StringBuilder();
-            temp.append(dateFormatYear.format(date));
-            temp.insert(temp.length() - 2, ":");
-            res = temp.toString();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return res;
-
-    }
 }
