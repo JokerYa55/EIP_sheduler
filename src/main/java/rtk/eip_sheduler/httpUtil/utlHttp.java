@@ -23,6 +23,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.log4j.Logger;
+import rtk.eip.params.result;
+import rtk.eip_sheduler.XMLUtil.utlXML;
 
 /**
  *
@@ -30,7 +32,7 @@ import org.apache.log4j.Logger;
  */
 public class utlHttp {
 
-    private Logger log = Logger.getLogger(getClass().getName());
+    private final Logger log = Logger.getLogger(getClass().getName());
 
     public String doPost(String url, Object params, Map<String, String> headerList) {
         log.debug("doPost => " + params.toString());
@@ -72,7 +74,12 @@ public class utlHttp {
             res = json.toString();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
+            result resErr = new result();
+            resErr.setResultCode("-1");
+            resErr.setResultComment(e.getMessage());
+            utlXML<result> utlxml = new utlXML();
+            res = utlxml.convertObjectToXml(resErr);
         }
         return res;
     }
@@ -113,7 +120,12 @@ public class utlHttp {
             res = json.toString();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
+            result resErr = new result();
+            resErr.setResultCode("-1");
+            resErr.setResultComment(e.getMessage());
+            utlXML<result> utlxml = new utlXML();
+            res = utlxml.convertObjectToXml(resErr);
         }
         return res;
     }
@@ -121,9 +133,9 @@ public class utlHttp {
     /**
      *
      * @param url
+     * @param params
      * @param headerList
      * @return
-     * @throws ParseException
      */
     public String doGet(String url, List params, Map<String, String> headerList) {
         System.out.println("doGet");
@@ -132,12 +144,10 @@ public class utlHttp {
         if (params != null) {
             StringBuilder pStr = new StringBuilder();
             for (Object param : params) {
-                pStr.append(param.toString());
-                //System.out.println("param = " + URLEncoder.encode(param.toString()));
+                pStr.append(param.toString());                
             }
             if (pStr.toString().length() > 0) {
-                url = url + "?" + pStr.toString();
-                //System.out.println("url = " + url);
+                url = url + "?" + pStr.toString();                
             }
         }
 
@@ -165,7 +175,12 @@ public class utlHttp {
             res = json.toString();
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            log.error(ex.getMessage());
+            result resErr = new result();
+            resErr.setResultCode("-1");
+            resErr.setResultComment(ex.getMessage());
+            utlXML<result> utlxml = new utlXML();
+            res = utlxml.convertObjectToXml(resErr);
         }
         return res;
     }
@@ -220,9 +235,9 @@ public class utlHttp {
             }
 
         } catch (Exception ex) {
-            System.out.println("ex Code sendPut: " + ex);
-            System.out.println("url:" + url);
-            System.out.println("data:" + params);
+            log.error("ex Code sendPut: " + ex);
+            log.error("url:" + url);
+            log.error("data:" + params);            
         } finally {
             httpClient.getConnectionManager().shutdown();
         }

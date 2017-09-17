@@ -8,8 +8,6 @@ package rtk.eip_sheduler.sheduler;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
