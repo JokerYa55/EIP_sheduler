@@ -233,7 +233,6 @@ public class utlHttp {
                 throw new RuntimeException("Failed : HTTP error code : "
                         + response.getStatusLine().getStatusCode());
             }
-
         } catch (Exception ex) {
             log.error("ex Code sendPut: " + ex);
             log.error("url:" + url);
@@ -241,8 +240,6 @@ public class utlHttp {
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
-
         return responseCode;
-
     }
 }
