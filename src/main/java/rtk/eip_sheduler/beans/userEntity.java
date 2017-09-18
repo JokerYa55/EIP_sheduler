@@ -35,11 +35,10 @@ import org.apache.log4j.Logger;
     , @NamedQuery(name = "userEntity.findByEmail", query = "SELECT t FROM userEntity t WHERE t.email = :email and t.user_status = 0")
     , @NamedQuery(name = "userEntity.findByHashType", query = "SELECT t FROM userEntity t WHERE t.hesh_type = :hashType and t.user_status = 0")
     , @NamedQuery(name = "userEntity.findByPassword", query = "SELECT t FROM userEntity t WHERE t.password = :password and t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findByPasswordNotHash", query = "SELECT t FROM userEntity t WHERE t.password_not_hash = :passwordNotHash and t.user_status = 0")
+    //, @NamedQuery(name = "userEntity.findByPasswordNotHash", query = "SELECT t FROM userEntity t WHERE t.password_not_hash = :passwordNotHash and t.user_status = 0")
     , @NamedQuery(name = "userEntity.findByPhone", query = "SELECT t FROM userEntity t WHERE t.phone = :phone and t.user_status = 0")
     , @NamedQuery(name = "userEntity.findByUsername", query = "SELECT t FROM userEntity t WHERE t.username = :username and t.user_status = 0")
     , @NamedQuery(name = "userEntity.findBySalt", query = "SELECT t FROM userEntity t WHERE t.salt = :salt and t.user_status = 0")})
-
 
 @Entity
 @Table(name = "t_users", indexes = {
@@ -74,8 +73,8 @@ public class userEntity implements Serializable {
     @Column(name = "password", nullable = true)
     private String password;
     // Незашифрованный пароль
-    @Column(name = "password_not_hash", nullable = true)
-    private String password_not_hash;
+//    @Column(name = "password_not_hash", nullable = true)
+//    private String password_not_hash;
     // Телефон
     @Column(name = "phone", nullable = true)
     private String phone;
@@ -218,22 +217,6 @@ public class userEntity implements Serializable {
      */
     public void setHesh_type(String hesh_type) {
         this.hesh_type = hesh_type;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getPassword_not_hash() {
-        return password_not_hash;
-    }
-
-    /**
-     *
-     * @param password_not_hash
-     */
-    public void setPassword_not_hash(String password_not_hash) {
-        this.password_not_hash = password_not_hash;
     }
 
     /**
