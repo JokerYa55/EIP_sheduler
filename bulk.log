@@ -1,0 +1,8 @@
+DEBUG main shedulerMain:main:38 - ***************************************************************************************
+DEBUG main shedulerMain:main:39 - Start => Mon Sep 18 22:01:31 MSK 2017
+DEBUG main shedulerMain:main:42 - url = http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1
+DEBUG main shedulerMain:main:46 - rtk.eip_sheduler.eipUtil.utlEip@5f14761c
+DEBUG main shedulerMain:main:38 - ***************************************************************************************
+DEBUG main shedulerMain:main:39 - Start => Mon Sep 18 22:01:53 MSK 2017
+DEBUG main shedulerMain:main:42 - url = http://192.168.1.150:8080/elkAdminRest/elkadm/addUser1
+DEBUG main shedulerMain:main:46 - rtk.eip_sheduler.eipUtil.utlEip@7ff19c33
