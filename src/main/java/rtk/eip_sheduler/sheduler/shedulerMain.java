@@ -14,11 +14,11 @@ import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import rtk.eip_sheduler.DAO.TUsersDAO;
-import rtk.eip_sheduler.DAO.TUsersLogDAO;
+import rtk.eip_sheduler.DAO.UsersLogDAO;
 import rtk.eip_sheduler.XMLUtil.utlXML;
 import static rtk.eip_sheduler.XMLUtil.utlXML.stringToXml;
 import rtk.eip_sheduler.beans.userEntity;
-import rtk.eip_sheduler.beans.TUsersLog;
+import rtk.eip_sheduler.beans.UsersLog;
 import rtk.eip_sheduler.eipUtil.utlEip;
 
 /**
@@ -44,9 +44,9 @@ public class shedulerMain {
             //em.setProperty(propertyName, log);
             utlEip Eip = new utlEip(new URL(args[0]));
             log.debug(Eip);
-            List<TUsersLog> logItems = (new TUsersLogDAO(em)).getList("TUsersLog.findByNoSend", TUsersLog.class);
+            List<UsersLog> logItems = (new UsersLogDAO(em)).getList("TUsersLog.findByNoSend", UsersLog.class);
 
-            for (TUsersLog item : logItems) {
+            for (UsersLog item : logItems) {
                 try {
                     log.debug(item);
                     // Получаем данные о пользователе
@@ -124,7 +124,7 @@ public class shedulerMain {
                 }
                 // Если получен положительный ответ то ставим отметку об успешной отправке
                 //item.setFlag(true);
-                (new TUsersLogDAO(em)).updateItem(item);
+                (new UsersLogDAO(em)).updateItem(item);
             }
 
         } catch (Exception e) {

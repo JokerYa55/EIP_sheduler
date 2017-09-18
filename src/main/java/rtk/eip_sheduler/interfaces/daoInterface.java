@@ -100,19 +100,6 @@ public interface daoInterface<T, V> {
         return res;
     }
 
-    default public List<T> test(long id, Class<T> cl) {
-        T res = null;
-        try {
-            EntityManager em = getEM();
-            TypedQuery<T> namedQuery = em.createNamedQuery("TUsers.findById", cl);
-            namedQuery.setParameter("id", id);
-            res = namedQuery.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     /**
      *
      * @param id
