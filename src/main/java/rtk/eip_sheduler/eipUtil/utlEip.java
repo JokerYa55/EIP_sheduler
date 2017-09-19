@@ -38,7 +38,7 @@ public class utlEip {
      * @return
      */
     public String addUser(userEntity user) {
-        log.debug("addUser");
+        log.debug("ADD_USER");
         String res = null;
         try {
             addUserParam param = new addUserParam();
@@ -75,7 +75,7 @@ public class utlEip {
      * @return
      */
     public String updateUser(userEntity user) {
-        log.debug("updateUser");
+        log.debug("UPD_USER");
         String res = null;
 
         try {
@@ -103,6 +103,9 @@ public class utlEip {
             if (user.getUser_region() != null) {
                 param.setRegion(user.getUser_region().toString());
             }
+            if (user.getUser_status() != null){
+                param.setUserStatus(user.getUser_status().toString());
+            }
 
             utlHttp http = new utlHttp();
             utlXML utlxml = new utlXML();
@@ -122,7 +125,7 @@ public class utlEip {
      * @return
      */
     public String changePassword(userEntity user) {
-        log.debug("changePassword => " + user);
+        log.debug("CHANGE_PASSWORD => " + user);
         String res = null;
         try {
             changePasswordParam param = new changePasswordParam();
