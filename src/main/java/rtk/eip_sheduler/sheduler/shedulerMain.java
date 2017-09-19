@@ -48,8 +48,8 @@ public class shedulerMain {
 
             for (UsersLog item : logItems) {
                 try {
-                    log.debug("----------------------------------------  "  + item.getId() + "  -----------------------------------------------------");
-                    log.debug(item);
+                    log.debug("***************************************  "  + item + "  ***************************************");
+                    //log.debug(item);
                     // Получаем данные о пользователе
                     userEntity user = (new TUsersDAO(em)).getItem(item.getUserId(), "userEntity.findById", userEntity.class);
                     log.debug(user);
