@@ -139,6 +139,22 @@ public class addUserParam {
         return "addUserParam{" + "user=" + user + ", autoCreateFlag=" + autoCreateFlag + ", surname=" + surname + ", name=" + name + ", patronymic=" + patronymic + ", dob=" + dob + ", gender=" + gender + ", region=" + region + ", contactEmail=" + contactEmail + ", contactPhone=" + contactPhone + ", password=" + password + '}';
     }
 
+    /*public String convertObjectToXml() {
+        try {
+            JAXBContext context = JAXBContext.newInstance(getClass());
+            Marshaller marshaller = context.createMarshaller();
+            // устанавливаем флаг для читабельного вывода XML в JAXB
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            // маршаллинг объекта в строку
+            StringWriter sw = new StringWriter();
+            marshaller.marshal(this, sw);            
+            return sw.toString();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
     @XmlAttribute
     public String getReqType() {
         return reqType;

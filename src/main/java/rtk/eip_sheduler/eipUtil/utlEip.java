@@ -5,13 +5,13 @@
  */
 package rtk.eip_sheduler.eipUtil;
 
-//import org.w3c.dom.Document;
-//import org.w3c.dom.Element;
+import java.net.URL;
+import rtk.eip_sheduler.beans.userEntity;
 //import javax.xml.parsers.DocumentBuilder;
 //import javax.xml.parsers.DocumentBuilderFactory;
-import java.net.URL;
-import rtk.eip_sheduler.beans.UserEntity;
 import org.apache.log4j.Logger;
+//import org.w3c.dom.Document;
+//import org.w3c.dom.Element;
 import rtk.eip.params.addUserParam;
 import rtk.eip.params.changePasswordParam;
 import rtk.eip.params.updUserParam;
@@ -37,7 +37,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String addUser(UserEntity user) {
+    public String addUser(userEntity user) {
         log.debug("ADD_USER");
         String res = null;
         try {
@@ -74,7 +74,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String updateUser(UserEntity user) {
+    public String updateUser(userEntity user) {
         log.debug("UPD_USER");
         String res = null;
 
@@ -103,7 +103,7 @@ public class utlEip {
             if (user.getUser_region() != null) {
                 param.setRegion(user.getUser_region().toString());
             }
-            if (user.getUser_status() != null) {
+            if (user.getUser_status() != null){
                 param.setUserStatus(user.getUser_status().toString());
             }
 
@@ -124,7 +124,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String changePassword(UserEntity user) {
+    public String changePassword(userEntity user) {
         log.debug("CHANGE_PASSWORD => " + user);
         String res = null;
         try {

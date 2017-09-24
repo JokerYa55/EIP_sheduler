@@ -5,21 +5,23 @@
  */
 package rtk.eip_sheduler.DAO;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
-import rtk.eip_sheduler.beans.UserEntity;
+import rtk.eip_sheduler.beans.userEntity;
 import rtk.eip_sheduler.interfaces.daoInterface;
 
 /**
  *
  * @author vasil
  */
-public class UserEntityDAO implements daoInterface<UserEntity, Long> {
+public class TUsersDAO implements daoInterface<userEntity, Long> {
 
-    private final EntityManager em;
-    private final Logger log = Logger.getLogger(getClass().getName());
+    private EntityManager em;
+    private Logger log = Logger.getLogger(getClass().getName());
 
-    public UserEntityDAO(EntityManager em) {
+    public TUsersDAO(EntityManager em) {
         this.em = em;
     }
 
@@ -29,10 +31,10 @@ public class UserEntityDAO implements daoInterface<UserEntity, Long> {
     }
 
 //    @Override
-//    public UserEntity getItem(Long id) {
-//        UserEntity res = null;
+//    public userEntity getItem(Long id) {
+//        userEntity res = null;
 //        try {
-//            TypedQuery<userEntity> namedQuery = em.createNamedQuery("UserEntity.findById", UserEntity.class);
+//            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findById", userEntity.class);
 //            namedQuery.setParameter("id", id);
 //            res = namedQuery.getSingleResult();
 //        } catch (Exception e) {
@@ -45,7 +47,7 @@ public class UserEntityDAO implements daoInterface<UserEntity, Long> {
 //    public List<userEntity> getList() {
 //        List<userEntity> res = null;
 //        try {
-//            TypedQuery<userEntity> namedQuery = em.createNamedQuery("UserEntity.findAll", UserEntity.class);
+//            TypedQuery<userEntity> namedQuery = em.createNamedQuery("userEntity.findAll", userEntity.class);
 //            res = namedQuery.getResultList();
 //        } catch (Exception e) {
 //            log.error(e.getMessage());
