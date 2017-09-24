@@ -6,7 +6,7 @@
 package rtk.eip_sheduler.eipUtil;
 
 import java.net.URL;
-import rtk.eip_sheduler.beans.userEntity;
+import rtk.eip_sheduler.beans.UserEntity;
 //import javax.xml.parsers.DocumentBuilder;
 //import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
@@ -37,7 +37,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String addUser(userEntity user) {
+    public String addUser(UserEntity user) {
         log.debug("ADD_USER");
         String res = null;
         try {
@@ -74,7 +74,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String updateUser(userEntity user) {
+    public String updateUser(UserEntity user) {
         log.debug("UPD_USER");
         String res = null;
 
@@ -124,7 +124,7 @@ public class utlEip {
      * @param user
      * @return
      */
-    public String changePassword(userEntity user) {
+    public String changePassword(UserEntity user) {
         log.debug("CHANGE_PASSWORD => " + user);
         String res = null;
         try {

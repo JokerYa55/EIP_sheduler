@@ -9,14 +9,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
-import rtk.eip_sheduler.beans.userEntity;
+import rtk.eip_sheduler.beans.UserEntity;
 import rtk.eip_sheduler.interfaces.daoInterface;
 
 /**
  *
  * @author vasil
  */
-public class TUsersDAO implements daoInterface<userEntity, Long> {
+public class TUsersDAO implements daoInterface<UserEntity, Long> {
 
     private EntityManager em;
     private Logger log = Logger.getLogger(getClass().getName());
