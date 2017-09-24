@@ -50,14 +50,14 @@ public class UserAttribute implements Serializable {
     private String value;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private userEntity userId;
+    private UserEntity userId;
     @Column(name = "visible_flag", unique = false, nullable = false, columnDefinition = "boolean DEFAULT true")
     private boolean visible_flag;
 
     public UserAttribute() {
     }
 
-    public UserAttribute(String name, String value, userEntity userId, boolean visible_flag) {
+    public UserAttribute(String name, String value, UserEntity userId, boolean visible_flag) {
         this.name = name;
         this.value = value;
         this.userId = userId;
@@ -88,11 +88,11 @@ public class UserAttribute implements Serializable {
         this.value = value;
     }
 
-    public userEntity getUserId() {
+    public UserEntity getUserId() {
         return userId;
     }
 
-    public void setUserId(userEntity userId) {
+    public void setUserId(UserEntity userId) {
         this.userId = userId;
     }
 

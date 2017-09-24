@@ -13,11 +13,11 @@ import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import rtk.eip_sheduler.DAO.TUsersDAO;
+import rtk.eip_sheduler.DAO.UserEntityDAO;
 import rtk.eip_sheduler.DAO.UsersLogDAO;
 import rtk.eip_sheduler.XMLUtil.utlXML;
 import static rtk.eip_sheduler.XMLUtil.utlXML.stringToXml;
-import rtk.eip_sheduler.beans.userEntity;
+import rtk.eip_sheduler.beans.UserEntity;
 import rtk.eip_sheduler.beans.UsersLog;
 import rtk.eip_sheduler.eipUtil.utlEip;
 
@@ -51,7 +51,7 @@ public class shedulerMain {
                     log.debug("*************  "  + item + "  ***************************************");
                     //log.debug(item);
                     // Получаем данные о пользователе
-                    userEntity user = (new TUsersDAO(em)).getItem(item.getUserId(), "userEntity.findById", userEntity.class);
+                    UserEntity user = (new UserEntityDAO(em)).getItem(item.getUserId(), "userEntity.findById", UserEntity.class);
                     log.debug(user);
 
                     // Определяем тип операции ADD или UPD
