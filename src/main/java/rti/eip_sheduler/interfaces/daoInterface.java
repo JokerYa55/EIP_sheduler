@@ -36,9 +36,9 @@ public interface daoInterface<T, V> {
         T res = null;
         try {
             EntityManager em = getEM();
-            //em.getTransaction().begin();
+            em.getTransaction().begin();
             em.merge(Item);
-            //em.getTransaction().commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,9 +55,9 @@ public interface daoInterface<T, V> {
         boolean res = true;
         try {
             EntityManager em = getEM();
-            //em.getTransaction().begin();
+            em.getTransaction().begin();
             em.detach(Item);
-            //em.getTransaction().commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
             res = false;
             e.printStackTrace();
@@ -77,10 +77,10 @@ public interface daoInterface<T, V> {
         try {
             EntityManager em = getEM();
             System.out.println("em = " + em);
-            //em.getTransaction().begin();
+            em.getTransaction().begin();
             em.merge(Item);
             res = true;
-            //em.getTransaction().commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
             res = false;
             e.printStackTrace();

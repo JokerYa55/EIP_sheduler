@@ -36,8 +36,8 @@ public class shedulerMain {
     /**
      * @param args the command line arguments
      */
-    private static EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
-    private static Logger log = Logger.getLogger(shedulerMain.class.getName());
+    private static final EntityManager em = Persistence.createEntityManagerFactory("EIP_shaduler_eip_sheduler_jar_1PU").createEntityManager();
+    private static final Logger log = Logger.getLogger(shedulerMain.class.getName());
 
     public static void main(String[] args) {
 
@@ -95,13 +95,14 @@ public class shedulerMain {
                                 if (res != null) {
                                     item.setLast_res(res);
                                     resXml = stringToXml(res);
+                                    log.info("\n\tresXml => " + resXml + "\n");
                                     if (resXml != null) {
                                         log.info(resXml);
                                         root = resXml.getDocumentElement();
                                         log.info("resXml => " + utlXML.xmlToString(resXml));
                                         resultCode = root.getAttribute("resultCode");
                                         lastCommand = root.getAttribute("lastCommand");
-                                        item.setLast_command("EIP Error => " + lastCommand);
+                                        item.setLast_command(lastCommand);
                                         resultComment = root.getAttribute("resultComment");
                                         log.info("resultCode = " + resultCode);
                                         switch (resultCode) {
@@ -146,6 +147,7 @@ public class shedulerMain {
                                 if (res != null) {
                                     item.setLast_res(res);
                                     resXml = stringToXml(res);
+                                    log.info("\n\tresXml => " + resXml + "\n");
                                     if (resXml != null) {
                                         if (resXml != null) {
                                             log.info(resXml);
@@ -154,7 +156,7 @@ public class shedulerMain {
                                             resultCode = root.getAttribute("resultCode");
                                             lastCommand = root.getAttribute("lastCommand");
                                             resultComment = root.getAttribute("resultComment");
-                                            item.setLast_command("EIP Error => " + lastCommand);
+                                            item.setLast_command(lastCommand);
                                             log.info("resultCode = " + resultCode);
                                             switch (resultCode) {
                                                 case "0":
@@ -178,7 +180,7 @@ public class shedulerMain {
                                                 log.info("resXml = " + utlXML.xmlToString(resXml));
                                                 resultCode = root.getAttribute("resultCode");
                                                 lastCommand = root.getAttribute("lastCommand");
-                                                item.setLast_command("EIP Error => " + lastCommand);
+                                                item.setLast_command(lastCommand);
                                                 log.info("resultCode = " + resultCode);
                                                 if (resultCode.equals("0")) {
                                                     item.setFlag(true);
