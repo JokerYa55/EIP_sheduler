@@ -72,10 +72,10 @@ public class utlXML<T> {
         try {
             JAXBContext context = JAXBContext.newInstance(t.getClass());
             Marshaller marshaller = context.createMarshaller();
-            // устанавливаем флаг для читабельного вывода XML в JAXB
+            // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„Р»Р°Рі РґР»СЏ С‡РёС‚Р°Р±РµР»СЊРЅРѕРіРѕ РІС‹РІРѕРґР° XML РІ JAXB
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-            // маршаллинг объекта в строку
+            // РјР°СЂС€Р°Р»Р»РёРЅРі РѕР±СЉРµРєС‚Р° РІ СЃС‚СЂРѕРєСѓ
             StringWriter sw = new StringWriter();
             marshaller.marshal(t, sw);
             return sw.toString();

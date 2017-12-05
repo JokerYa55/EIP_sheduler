@@ -8,13 +8,13 @@
     <properties>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.1.240:5432/db_users"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.0.10:5432/db_users"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="123"/>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.logging.logger" value="DefaultLogger"/>
-      <property name="eclipselink.logging.file" value="c:\log\sql.log"/>
+      <property name="eclipselink.logging.file" value="/var/log/keycloak/shaduler_db.log"/>
     </properties>
   </persistence-unit>
 </persistence>
