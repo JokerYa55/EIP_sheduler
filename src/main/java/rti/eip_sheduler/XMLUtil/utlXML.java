@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip_sheduler.XMLUtil;
+package rti.eip_sheduler.XMLUtil;
 
 import java.io.StringReader;
 import java.io.StringWriter;

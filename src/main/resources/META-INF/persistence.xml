@@ -3,9 +3,9 @@
   <persistence-unit name="EIP_shaduler_eip_sheduler_jar_1PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>rtk.eip_sheduler.beans.UserEntity</class>
-    <class>rtk.eip_sheduler.beans.UsersLog</class>
-    <class>rtk.eip_sheduler.beans.AppProperties</class>
-    <class>rtk.eip_sheduler.beans.UserAttribute</class>
+    <class>rti.eip_sheduler.beans.UserAttribute</class>
+    <class>rti.eip_sheduler.beans.AppProperties</class>
+    <class>rti.eip_sheduler.beans.UsersLog</class>
     <properties>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>

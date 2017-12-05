@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip_sheduler.eipUtil;
+package rti.eip_sheduler.eipUtil;
 
 import java.net.URL;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
-import rtk.eip_sheduler.beans.UserEntity;
-import rtk.eip.params.addUserParam;
-
-import rtk.eip.params.changePasswordParam;
-import rtk.eip.params.updUserParam;
-import rtk.eip_sheduler.XMLUtil.utlXML;
+import rti.eip_sheduler.beans.UserEntity;
+import rti.eip.params.addUserParam;
+import rti.eip.params.changePasswordParam;
+import rti.eip.params.updUserParam;
+import rti.eip_sheduler.XMLUtil.utlXML;
 //import static rtk.eip_sheduler.XMLUtil.utlXML.xmlToString;
-import rtk.eip_sheduler.httpUtil.utlHttp;
+import rti.eip_sheduler.httpUtil.utlHttp;
 
 /**
  *

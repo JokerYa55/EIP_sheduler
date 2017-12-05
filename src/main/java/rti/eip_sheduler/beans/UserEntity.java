@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip_sheduler.beans;
+package rti.eip_sheduler.beans;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -24,62 +24,85 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.apache.log4j.Logger;
 
+
 /**
  *
  * @author vasil
  */
+//@Entity
+//@Table(name = "t_users")
+//@XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "UserEntity.findAll", query = "SELECT t FROM UserEntity t")
+//    , @NamedQuery(name = "UserEntity.findById", query = "SELECT t FROM UserEntity t WHERE t.id = :id")
+//    , @NamedQuery(name = "UserEntity.findByCreateDate", query = "SELECT t FROM UserEntity t WHERE t.createDate = :createDate")
+//    , @NamedQuery(name = "UserEntity.findByDescription", query = "SELECT t FROM UserEntity t WHERE t.description = :description")
+//    , @NamedQuery(name = "UserEntity.findByEmail", query = "SELECT t FROM UserEntity t WHERE t.email = :email")
+//    , @NamedQuery(name = "UserEntity.findByEnabled", query = "SELECT t FROM UserEntity t WHERE t.enabled = :enabled")
+//    , @NamedQuery(name = "UserEntity.findByFirstname", query = "SELECT t FROM UserEntity t WHERE t.firstname = :firstname")
+//    , @NamedQuery(name = "UserEntity.findByHashType", query = "SELECT t FROM UserEntity t WHERE t.hashType = :hashType")
+//    , @NamedQuery(name = "UserEntity.findByLastname", query = "SELECT t FROM UserEntity t WHERE t.lastname = :lastname")
+//    , @NamedQuery(name = "UserEntity.findByPassword", query = "SELECT t FROM UserEntity t WHERE t.password = :password")
+//    , @NamedQuery(name = "UserEntity.findByPasswordNotHash", query = "SELECT t FROM UserEntity t WHERE t.passwordNotHash = :passwordNotHash")
+//    , @NamedQuery(name = "UserEntity.findByPhone", query = "SELECT t FROM UserEntity t WHERE t.phone = :phone")
+//    , @NamedQuery(name = "UserEntity.findBySalt", query = "SELECT t FROM UserEntity t WHERE t.salt = :salt")
+//    , @NamedQuery(name = "UserEntity.findByThirdname", query = "SELECT t FROM UserEntity t WHERE t.thirdname = :thirdname")
+//    , @NamedQuery(name = "UserEntity.findByUpdateDate", query = "SELECT t FROM UserEntity t WHERE t.updateDate = :updateDate")
+//    , @NamedQuery(name = "UserEntity.findByUserRegion", query = "SELECT t FROM UserEntity t WHERE t.userRegion = :userRegion")
+//    , @NamedQuery(name = "UserEntity.findByUserStatus", query = "SELECT t FROM UserEntity t WHERE t.userStatus = :userStatus")
+//    , @NamedQuery(name = "UserEntity.findByUsername", query = "SELECT t FROM UserEntity t WHERE t.username = :username")})
 @NamedQueries({
-    @NamedQuery(name = "userEntity.findAll", query = "SELECT t FROM userEntity t where t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findById", query = "SELECT t FROM userEntity t WHERE t.id = :id")
-    //, @NamedQuery(name = "userEntity.findByAddress", query = "SELECT t FROM userEntity t WHERE t.address = :address and t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findByEmail", query = "SELECT t FROM userEntity t WHERE t.email = :email and t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findByHashType", query = "SELECT t FROM userEntity t WHERE t.hesh_type = :hashType and t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findByPassword", query = "SELECT t FROM userEntity t WHERE t.password = :password and t.user_status = 0")
-    //, @NamedQuery(name = "userEntity.findByPasswordNotHash", query = "SELECT t FROM userEntity t WHERE t.password_not_hash = :passwordNotHash and t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findByPhone", query = "SELECT t FROM userEntity t WHERE t.phone = :phone and t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findByUsername", query = "SELECT t FROM userEntity t WHERE t.username = :username and t.user_status = 0")
-    , @NamedQuery(name = "userEntity.findBySalt", query = "SELECT t FROM userEntity t WHERE t.salt = :salt and t.user_status = 0")})
+    @NamedQuery(name = "userEntity.findAll", query = "SELECT t FROM UserEntity t where t.user_status = 0")
+    , @NamedQuery(name = "userEntity.findById", query = "SELECT t FROM UserEntity t WHERE t.id = :id")
+    //, @NamedQuery(name = "UserEntity.findByAddress", query = "SELECT t FROM UserEntity t WHERE t.address = :address and t.user_status = 0")
+    , @NamedQuery(name = "userEntity.findByEmail", query = "SELECT t FROM UserEntity t WHERE t.email = :email and t.user_status = 0")
+    , @NamedQuery(name = "userEntity.findByHashType", query = "SELECT t FROM UserEntity t WHERE t.hash_type = :hashType and t.user_status = 0")
+    , @NamedQuery(name = "userEntity.findByPassword", query = "SELECT t FROM UserEntity t WHERE t.password = :password and t.user_status = 0")
+    //, @NamedQuery(name = "UserEntity.findByPasswordNotHash", query = "SELECT t FROM UserEntity t WHERE t.password_not_hash = :passwordNotHash and t.user_status = 0")
+    , @NamedQuery(name = "userEntity.findByPhone", query = "SELECT t FROM UserEntity t WHERE t.phone = :phone and t.user_status = 0")
+    , @NamedQuery(name = "userEntity.findByUsername", query = "SELECT t FROM UserEntity t WHERE t.username = :username and t.user_status = 0")
+    , @NamedQuery(name = "userEntity.findBySalt", query = "SELECT t FROM UserEntity t WHERE t.salt = :salt and t.user_status = 0")})
 
 @Entity
 @Table(name = "t_users", indexes = {
     @Index(name = "t_users_status_idx", columnList = "user_status")
     ,
     @Index(name = "t_users_username_idx", columnList = "username")})
-public class userEntity implements Serializable {
+public class UserEntity implements Serializable {
 
-    private static final Logger log = Logger.getLogger(userEntity.class);
+    private static final Logger log = Logger.getLogger(UserEntity.class);
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_users_id_seq")
     @SequenceGenerator(name = "t_users_id_seq", sequenceName = "t_users_id_seq", allocationSize = 1)
     private Long id;
-    // Логин
+    // �����
     @Column(name = "username", unique = true, nullable = false)
     private String username;
-    // Фамилия    
+    // �������    
     @Column(name = "firstName", unique = false, nullable = true)
     private String firstName;
-    // Имя
+    // ���
     @Column(name = "lastName", unique = false, nullable = true)
     private String lastName;
-    // Отчество
+    // ��������
     @Column(name = "thirdName", unique = false, nullable = true)
     private String thirdName;
     // e-mail
-    @Column(name = "email", unique = true, nullable = true)
+    @Column(name = "email", unique = false, nullable = true)
     private String email;
-    // Пароль
+    // ������
     @Column(name = "password", nullable = true)
     private String password;
-    // Незашифрованный пароль
+    // ��������������� ������
 //    @Column(name = "password_not_hash", nullable = true)
 //    private String password_not_hash;
-    // Телефон
+    // �������
     @Column(name = "phone", nullable = true)
     private String phone;
     @Column(name = "hash_type", nullable = true)
-    private String hesh_type;
+    private String hash_type;
     @Column(name = "salt", nullable = true)
     private String salt;
     @Column(name = "user_status", unique = false, nullable = false, columnDefinition = "integer DEFAULT 0")
@@ -104,10 +127,10 @@ public class userEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", orphanRemoval = true)
     private Collection<UserAttribute> userAttributeCollection;
 
-    public userEntity() {
+    public UserEntity() {
     }
 
-    public userEntity(Long id) {
+    public UserEntity(Long id) {
         this.id = id;
     }
 
@@ -201,22 +224,6 @@ public class userEntity implements Serializable {
     public void setHash(String hash) {
         //this.hash = keycloak.storage.util.hashUtil.sha1(this.password);
         this.password = hash;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getHesh_type() {
-        return hesh_type;
-    }
-
-    /**
-     *
-     * @param hesh_type
-     */
-    public void setHesh_type(String hesh_type) {
-        this.hesh_type = hesh_type;
     }
 
     /**
@@ -318,7 +325,7 @@ public class userEntity implements Serializable {
     public void addUserAttribute(UserAttribute attr) {
         log.info("addUserAttribute => " + attr);
         log.info("addUserAttribute => " + this);
-        // Проверяем есть ли такой аттрибут в БД
+        // ��������� ���� �� ����� �������� � ��
         boolean flag = false;
         if (this.userAttributeCollection != null) {
             for (UserAttribute t : this.userAttributeCollection) {
@@ -353,10 +360,19 @@ public class userEntity implements Serializable {
         if (temp != null)this.userAttributeCollection.remove(temp);     */
 
     }
+    
+    public String getHash_type() {
+        return hash_type;
+    }
+
+    public void setHash_type(String hash_type) {
+        this.hash_type = hash_type;
+    }
 
     @Override
     public String toString() {
-        return "UserEntity{" + "id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", thirdName=" + thirdName + ", email=" + email + '}';
+        return "UserEntity{" + "id=" + id + ",\n\t username=" + username + ",\n\t firstName=" + firstName + ",\n\t lastName=" + lastName + ",\n\t thirdName=" + thirdName + ",\n\t email=" + email + ",\n\t password=" + password + ",\n\t phone=" + phone + ",\n\t hash_type=" + hash_type + ",\n\t salt=" + salt + ",\n\t user_status=" + user_status + ",\n\t user_region=" + user_region + ",\n\t description=" + description + '}';
     }
-
+    
+    
 }

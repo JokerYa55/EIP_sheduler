@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip.params;
+package rti.eip.params;
 
 import java.io.StringReader;
 import java.io.StringWriter;

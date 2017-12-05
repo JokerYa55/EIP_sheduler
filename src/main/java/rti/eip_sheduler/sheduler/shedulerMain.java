@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip_sheduler.sheduler;
+package rti.eip_sheduler.sheduler;
 
 import java.net.URL;
 import java.util.Date;
@@ -17,15 +17,15 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import rtk.eip_sheduler.DAO.AppPropertiesDAO;
-import rtk.eip_sheduler.DAO.UserEntityDAO;
-import rtk.eip_sheduler.DAO.UsersLogDAO;
-import rtk.eip_sheduler.XMLUtil.utlXML;
-import static rtk.eip_sheduler.XMLUtil.utlXML.stringToXml;
-import rtk.eip_sheduler.beans.AppProperties;
-import rtk.eip_sheduler.beans.UserEntity;
-import rtk.eip_sheduler.beans.UsersLog;
-import rtk.eip_sheduler.eipUtil.utlEip;
+import rti.eip_sheduler.DAO.AppPropertiesDAO;
+import rti.eip_sheduler.DAO.UserEntityDAO;
+import rti.eip_sheduler.DAO.UsersLogDAO;
+import rti.eip_sheduler.XMLUtil.utlXML;
+import static rti.eip_sheduler.XMLUtil.utlXML.stringToXml;
+import rti.eip_sheduler.beans.AppProperties;
+import rti.eip_sheduler.beans.UserEntity;
+import rti.eip_sheduler.beans.UsersLog;
+import rti.eip_sheduler.eipUtil.utlEip;
 
 /**
  *

@@ -1,7 +1,7 @@
 /*
  * ����� ����������� ���������� ��������� HTTP  
  */
-package rtk.eip_sheduler.httpUtil;
+package rti.eip_sheduler.httpUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,8 +19,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.log4j.Logger;
-import rtk.eip.params.result;
-import rtk.eip_sheduler.XMLUtil.utlXML;
+import rti.eip.params.result;
+import rti.eip_sheduler.XMLUtil.utlXML;
 
 /**
  * ����� ��������� ������ ��������� HTTP

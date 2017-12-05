@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip_sheduler.interfaces;
+package rti.eip_sheduler.interfaces;
 
 import java.util.List;
 import java.util.Map;

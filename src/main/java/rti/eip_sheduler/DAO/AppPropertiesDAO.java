@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip_sheduler.DAO;
+package rti.eip_sheduler.DAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import rtk.eip_sheduler.beans.AppProperties;
-import rtk.eip_sheduler.interfaces.daoInterface;
+import rti.eip_sheduler.beans.AppProperties;
+import rti.eip_sheduler.interfaces.daoInterface;
 
 /**
  *

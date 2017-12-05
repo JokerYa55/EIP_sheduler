@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rtk.eip_sheduler.beans;
+package rti.eip_sheduler.beans;
 
 import java.io.Serializable;
 import javax.persistence.Column;
