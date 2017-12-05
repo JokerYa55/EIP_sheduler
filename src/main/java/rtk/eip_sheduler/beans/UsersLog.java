@@ -27,17 +27,17 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "t_users_log")
 @NamedQueries({
-    @NamedQuery(name = "TUsersLog.findAll", query = "SELECT t FROM UsersLog t where t.flag = false and t.send_count<=:send_count")
-    , @NamedQuery(name = "TUsersLog.findById", query = "SELECT t FROM UsersLog t WHERE t.id = :id and t.flag = false and t.send_count<=:send_count")
-    , @NamedQuery(name = "TUsersLog.findByFlag", query = "SELECT t FROM UsersLog t WHERE t.flag = :flag and t.send_count<=:send_count")
-    , @NamedQuery(name = "TUsersLog.findByNoSend", query = "SELECT t FROM UsersLog t WHERE t.flag = false and t.send_count<=10")    
-    , @NamedQuery(name = "TUsersLog.findByOperType", query = "SELECT t FROM UsersLog t WHERE t.operType = :operType and t.flag = false and t.send_count<=:send_count")
-    , @NamedQuery(name = "TUsersLog.findByUserId", query = "SELECT t FROM UsersLog t WHERE t.userId = :userId and t.flag = false and t.send_count<=:send_count")
-    , @NamedQuery(name = "TUsersLog.findByUsername", query = "SELECT t FROM UsersLog t WHERE t.username = :username and t.flag = false and t.send_count<=:send_count")
-    , @NamedQuery(name = "TUsersLog.findByDateOper", query = "SELECT t FROM UsersLog t WHERE t.dateOper = :dateOper and t.flag = false and t.send_count<=:send_count")})
+    @NamedQuery(name = "UsersLog.findAll", query = "SELECT t FROM UsersLog t where t.flag = false and t.send_count<:send_count")
+    , @NamedQuery(name = "UsersLog.findById", query = "SELECT t FROM UsersLog t WHERE t.id = :id and t.flag = false and t.send_count<:send_count")
+    , @NamedQuery(name = "UsersLog.findByFlag", query = "SELECT t FROM UsersLog t WHERE t.flag = :flag and t.send_count<:send_count order by t.id")
+    , @NamedQuery(name = "UsersLog.findByNoSend", query = "SELECT t FROM UsersLog t WHERE t.flag = false and t.send_count<10")
+    , @NamedQuery(name = "UsersLog.findByOperType", query = "SELECT t FROM UsersLog t WHERE t.operType = :operType and t.flag = false and t.send_count<:send_count")
+    , @NamedQuery(name = "UsersLog.findByUserId", query = "SELECT t FROM UsersLog t WHERE t.userId = :userId and t.flag = false and t.send_count<:send_count")
+    , @NamedQuery(name = "UsersLog.findByUsername", query = "SELECT t FROM UsersLog t WHERE t.username = :username and t.flag = false and t.send_count<:send_count")
+    , @NamedQuery(name = "UsersLog.findByDateOper", query = "SELECT t FROM UsersLog t WHERE t.dateOper = :dateOper and t.flag = false and t.send_count<:send_count")})
 public class UsersLog implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_users_log_id_seq")
@@ -65,6 +65,8 @@ public class UsersLog implements Serializable {
     private String info;
     @Column(name = "last_command", nullable = true, columnDefinition = "text")
     private String last_command;
+    @Column(name = "last_res", nullable = true, columnDefinition = "text")
+    private String last_res;
 
     public UsersLog() {
     }
@@ -129,24 +131,12 @@ public class UsersLog implements Serializable {
         this.dateOper = dateOper;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getLast_res() {
+        return last_res;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsersLog)) {
-            return false;
-        }
-        UsersLog other = (UsersLog) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setLast_res(String last_res) {
+        this.last_res = last_res;
     }
 
     public Integer getSend_count() {
@@ -174,8 +164,28 @@ public class UsersLog implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof UsersLog)) {
+            return false;
+        }
+        UsersLog other = (UsersLog) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return "TUsersLog{" + "id=" + id + ", flag=" + flag + ", operType=" + operType + ", userId=" + userId + ", username=" + username + ", dateOper=" + dateOper + ", send_count=" + send_count + ", info=" + info + ", last_command=" + last_command + '}';
+        return "\nUsersLog{" + "id=" + id + ",\n\t flag=" + flag + ",\n\t operType=" + operType + ",\n\t userId=" + userId + ",\n\t username=" + username + ",\n\t dateOper=" + dateOper + ",\n\t send_count=" + send_count + ",\n\t info=" + info + ",\n\t last_command=" + last_command + ",\n\t last_res=" + last_res + '}';
     }
 
 }

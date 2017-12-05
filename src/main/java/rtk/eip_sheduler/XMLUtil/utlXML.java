@@ -53,6 +53,7 @@ public class utlXML<T> {
 
     public static Document stringToXml(String xmlString)  {
         try {
+            System.out.println("stringToXml => " + xmlString);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(new InputSource(new StringReader(xmlString)));

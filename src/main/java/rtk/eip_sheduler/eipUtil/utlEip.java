@@ -6,13 +6,11 @@
 package rtk.eip_sheduler.eipUtil;
 
 import java.net.URL;
-import rtk.eip_sheduler.beans.UserEntity;
-//import javax.xml.parsers.DocumentBuilder;
-//import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
-//import org.w3c.dom.Document;
-//import org.w3c.dom.Element;
+import org.apache.log4j.Priority;
+import rtk.eip_sheduler.beans.UserEntity;
 import rtk.eip.params.addUserParam;
+
 import rtk.eip.params.changePasswordParam;
 import rtk.eip.params.updUserParam;
 import rtk.eip_sheduler.XMLUtil.utlXML;
@@ -38,34 +36,55 @@ public class utlEip {
      * @return
      */
     public String addUser(UserEntity user) {
-        log.debug("ADD_USER");
+        log.info("ADD_USER => " + user);
         String res = null;
         try {
             addUserParam param = new addUserParam();
             param.setContactEmail(user.getEmail());
-            param.setContactPhone(user.getPhone());
+            if (user.getPhone().length() > 10) {
+                log.warn("������� ����� ������ �������� : " + user.getPhone() + " len = " + user.getPhone().length());
+                param.setContactPhone(user.getPhone().substring(1));
+            } else {
+                param.setContactPhone(user.getPhone());
+            }
             param.setReqType("CREATE_USER_PASSWORD");
             param.setSalt(user.getSalt());
             param.setHash(user.getPassword());
-            param.setHash_type(user.getHesh_type());
+            param.setHash_type(user.getHash_type().toUpperCase());            
             param.setUser(user.getUsername());
-            param.setSurname(user.getFirstName());
-            param.setName(user.getLastName());
+            
+            // ���
+            param.setName(user.getFirstName());
+            
+            // �������
+            param.setSurname(user.getLastName());
+            
+            
             param.setPatronymic(user.getThirdName());
             if (user.getUser_region() != null) {
                 param.setRegion(user.getUser_region().toString());
+            } else {
+                log.warn("�� ��������� ������");
             }
-
             utlHttp http = new utlHttp();
             utlXML utlxml = new utlXML();
 
             String dataXml = utlxml.convertObjectToXml(param);
-            log.debug("dataXml => " + dataXml);
+            log.info("dataXml => " + dataXml);
             res = http.doPost(url.toString(), dataXml, null);
 
+            log.info("res1 = " + res);
+            StringBuffer resBuf = new StringBuffer(res);
+            log.info("len = " + resBuf.length());
+            log.info("index = " + resBuf.lastIndexOf("/"));
+            resBuf.insert(resBuf.lastIndexOf("/"), "\nlastCommand=\"" + dataXml.replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\"", "'").replaceAll("<", "{").replaceAll("/>", "}").replaceAll(">", "}") + "\"");
+            //.replaceAll("<?", "{").replaceAll("?>", "}")
+            res = resBuf.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.log(Priority.ERROR, e);
         }
+        log.debug("res = " + res);
+        log.info("****************** END ADD_USER *********************************");
         return res;
     }
 
@@ -75,7 +94,7 @@ public class utlEip {
      * @return
      */
     public String updateUser(UserEntity user) {
-        log.debug("UPD_USER");
+        log.info("******************** UPD_USER *******************************");
         String res = null;
 
         try {
@@ -84,38 +103,60 @@ public class utlEip {
                 param.setContactEmail(user.getEmail());
             }
             if (user.getPhone() != null) {
-                param.setContactPhone(user.getPhone());
+                if (user.getPhone().length() > 10) {
+                    log.warn("������� ����� ������ �������� : " + user.getPhone() + " len = " + user.getPhone().length());
+                    param.setContactPhone(user.getPhone().substring(1));
+                } else {
+                    param.setContactPhone(user.getPhone());
+                }
+                //param.setContactPhone(user.getPhone());
             }
 
             param.setReqType("EDIT_USER");
             if (user.getUsername() != null) {
                 param.setUser(user.getUsername());
             }
+            
+            // ���
             if (user.getFirstName() != null) {
-                param.setSurname(user.getFirstName());
+                param.setName(user.getFirstName());
+                
             }
+            
+            // �������
             if (user.getLastName() != null) {
-                param.setName(user.getLastName());
+                param.setSurname(user.getLastName());
             }
+            
             if (user.getThirdName() != null) {
                 param.setPatronymic(user.getThirdName());
             }
             if (user.getUser_region() != null) {
                 param.setRegion(user.getUser_region().toString());
             }
-            if (user.getUser_status() != null){
+            if ((user.getUser_status() != null) && (user.getUser_status() != 0)) {
                 param.setUserStatus(user.getUser_status().toString());
             }
 
             utlHttp http = new utlHttp();
             utlXML utlxml = new utlXML();
             String dataXml = utlxml.convertObjectToXml(param);
-            log.debug("dataXml => " + dataXml);
+            log.info("dataXml => " + dataXml);
             res = http.doPost(url.toString(), dataXml, null);
 
+            log.info("res1 = " + res);
+            StringBuffer resBuf = new StringBuffer(res);
+            log.info("len = " + resBuf.length());
+            log.info("index = " + resBuf.lastIndexOf("/"));
+            resBuf.insert(resBuf.lastIndexOf("/"), "\nlastCommand=\"" + dataXml.replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\"", "'").replaceAll("<", "{").replaceAll("/>", "}").replaceAll(">", "}") + "\"");
+            //.replaceAll("<?", "{").replaceAll("?>", "}")
+            res = resBuf.toString();
+
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.log(Priority.ERROR, e);
         }
+        log.info("res = " + res);
+        log.info("******************** END UPD_USER *******************************");
         return res;
     }
 
@@ -130,7 +171,7 @@ public class utlEip {
         try {
             changePasswordParam param = new changePasswordParam();
             param.setHash(user.getPassword());
-            param.setHashType(user.getHesh_type());
+            param.setHashType(user.getHash_type().toUpperCase());
             param.setReqType("CHANGE_PASSWORD");
             param.setSalt(user.getSalt());
             param.setUser(user.getUsername());
@@ -138,11 +179,21 @@ public class utlEip {
             utlHttp http = new utlHttp();
             utlXML utlxml = new utlXML();
             String dataXml = utlxml.convertObjectToXml(param);
-            log.debug("dataXml => " + dataXml);
+            log.info("dataXml => " + dataXml);
             res = http.doPost(url.toString(), dataXml, null);
+
+            log.info("res1 = " + res);
+            StringBuffer resBuf = new StringBuffer(res);
+            log.info("len = " + resBuf.length());
+            log.info("index = " + resBuf.lastIndexOf("/"));
+            resBuf.insert(resBuf.lastIndexOf("/"), "\nlastCommand=\"" + dataXml.replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\"", "'").replaceAll("<", "{").replaceAll("/>", "}").replaceAll(">", "}") + "\"");
+            //.replaceAll("<?", "{").replaceAll("?>", "}")
+            res = resBuf.toString();
+
         } catch (Exception e) {
             log.error(e.getMessage());
         }
+        log.info("res = " + res);
         return res;
     }
 
